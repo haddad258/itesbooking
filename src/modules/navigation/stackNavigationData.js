@@ -8,6 +8,7 @@ import User from '../User/useadd'
 import Floors from '../floors/addfloors'
 import Rooms from '../rooms/addrooms'
 import Buildings from '../buildings/addbuildings'
+import Showuser from '../User/showuser'
 
 // import ProfileScreen from '../profile/ProfileViewContainer';
 // import ArticleScreen from '../article/ArticleViewContainer';
@@ -76,7 +77,7 @@ const StackNavigationData = [
   },
   {
     name: 'Profile',
-    component: AvailableInFullVersion,
+    component: Showuser,
     headerLeft: headerLeftComponent,
     headerBackground: { source: headerBackground },
     headerTitleStyle: {

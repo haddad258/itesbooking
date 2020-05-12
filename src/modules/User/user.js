@@ -20,7 +20,7 @@ export default class User extends Component<Props> {
                   phone:'',
                   status: '',
                   wholeResult: '',
-                  baseUrl: 'http://192.168.43.236:9970/sib-api/common/user' };
+                  baseUrl: 'http://192.168.1.21:9970/sib-api/common/user' };
  
     }
  
@@ -92,7 +92,7 @@ export default class User extends Component<Props> {
  
     <View style={styles.container}>
  
-    <Text style={styles.input}>Registeration user</Text>
+    <Text style={styles.input}>Add user</Text>
  
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}

@@ -3,11 +3,12 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import { colors, fonts } from '../../styles';
 
-const chartIcon = require('../../../assets/images/pages/chart.png');
-const calendarIcon = require('../../../assets/images/pages/calendar.png');
-const chatIcon = require('../../../assets/images/pages/chat.png');
-const galleryIcon = require('../../../assets/images/pages/gallery.png');
-const profileIcon = require('../../../assets/images/pages/profile.png');
+const chartIcon = require('../../assets/images/pages/chart.png');
+const calendarIcon = require('../../assets/images/pages/calendar.png');
+const chatIcon = require('../../assets/images/pages/chat.png');
+const galleryIcon = require('../../assets/images/pages/gallery.png');
+const profileIcon = require('../../assets/images/pages/profile.png');
+ const settings = require('../../assets/images/drawer/sett.png')
 
 export default function PagesScreen(props) {
   return (
@@ -22,7 +23,7 @@ export default function PagesScreen(props) {
             source={chartIcon}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Charts</Text>
+          <Text style={styles.itemText}>Show history</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Gallery')}
@@ -78,16 +79,18 @@ export default function PagesScreen(props) {
           />
           <Text style={styles.itemText}>Login</Text>
         </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('User')}
           style={styles.item}
         >
           <Image
             resizeMode="contain"
-            source={calendarIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>User</Text>
+          <Text style={styles.itemTextt}>User</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Floors')}
@@ -95,10 +98,10 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={calendarIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Floors</Text>
+          <Text style={styles.itemTextt}>Floors</Text>
         </TouchableOpacity>
         
       </View>
@@ -109,10 +112,10 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={chartIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Rooms</Text>
+          <Text style={styles.itemTextt}>Rooms</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Buildings')}
@@ -120,10 +123,10 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={galleryIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Buildings</Text>
+          <Text style={styles.itemTextt}>Buildings</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Zone')}
@@ -131,10 +134,10 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={profileIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Zone</Text>
+          <Text style={styles.itemTextt}>Zone</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -169,5 +172,8 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     height: 35,
-  },
+  },itemTextt: {
+    color: "black",
+    fontFamily: fonts.primary,
+  }
 });

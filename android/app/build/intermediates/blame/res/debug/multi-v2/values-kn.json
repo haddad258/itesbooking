@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/haddadrafik258/Desktop/itesbooking/itesbooking/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
+            "outputFile": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
             "map": [
                 {
                     "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/04c0bc8e0c867360895e167943869649/res/values-kn/values-kn.xml",

@@ -29,7 +29,7 @@ const headerLeftComponent = (props) => {
       }}
     >
       <Image
-        source={require('../../../assets/images/icons/arrow-back.png')}
+        source={require('../../assets/images/icons/arrow-back.png')}
         resizeMode="contain"
         style={{
           height: 20,
@@ -39,7 +39,7 @@ const headerLeftComponent = (props) => {
   )
 }
 
-const headerBackground = require('../../../assets/images/topBarBg.png');
+const headerBackground = require('../../assets/images/topBarBg.png');
 
 const StackNavigationData = [
   {

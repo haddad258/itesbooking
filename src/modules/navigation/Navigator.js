@@ -9,12 +9,12 @@ import NavigatorView from './RootNavigation';
 
 import AvailableInFullVersion from '../../modules/availableInFullVersion/AvailableInFullVersionViewContainer';
 
-const iconHome = require('../../../assets/images/drawer/home.png');
-const iconCalendar = require('../../../assets/images/drawer/calendar.png');
-const iconGrids = require('../../../assets/images/drawer/grids.png');
-const iconPages = require('../../../assets/images/drawer/pages.png');
-const iconComponents = require('../../../assets/images/drawer/components.png');
-const iconSettings = require('../../../assets/images/drawer/settings.png');
+const iconHome = require('../../assets/images/drawer/home.png');
+const iconCalendar = require('../../assets/images/drawer/calendar.png');
+const iconGrids = require('../../assets/images/drawer/grids.png');
+const iconPages = require('../../assets/images/drawer/pages.png');
+const iconComponents = require('../../assets/images/drawer/components.png');
+const iconSettings = require('../../assets/images/drawer/settings.png');
 
 const drawerData = [
   {
@@ -30,7 +30,7 @@ const drawerData = [
     icon: iconGrids,
   },
   {
-    name: 'Pages',
+    name: 'Profile',
     icon: iconPages,
   },
   {
@@ -47,7 +47,7 @@ function CustomDrawerContent(props) {
       <View style={styles.avatarContainer}>
         <Image
           style={styles.avatar}
-          source={require('../../../assets/images/iteslab.png')}
+          source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}
         />
         <View style={{ paddingLeft: 15 }}>
           <Text style={styles.userName}>Haddad Rafik</Text>

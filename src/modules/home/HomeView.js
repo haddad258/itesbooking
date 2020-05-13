@@ -25,7 +25,7 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../../assets/images/background.png')}
+        source={require('../../assets/images/background.png')}
         style={styles.bgImage}
         resizeMode="cover"
       >

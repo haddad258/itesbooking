@@ -82,7 +82,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
      
  
       <ImageBackground
-        source={require('../../../assets/images/background.png')}
+        source={require('../../assets/images/background.png')}
         imageStyle={{resizeMode: 'stretch'}}
         style={{width: '100%', height: '100%'}}>
    <ScrollView>
@@ -92,7 +92,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
  
     <View style={styles.container}>
  
-    <Text style={styles.input}>Registeration</Text>
+    <Text style={styles.input}>Reserve</Text>
  
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}

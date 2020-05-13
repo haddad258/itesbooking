@@ -22,7 +22,7 @@ export default function NavigatorView(props) {
         }}
       >
         <Image
-          source={require('../../../assets/images/drawer/menu.png')}
+          source={require('../../assets/images/drawer/menu.png')}
           resizeMode="contain"
           style={{
             height: 20,

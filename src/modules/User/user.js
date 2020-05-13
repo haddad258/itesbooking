@@ -82,7 +82,7 @@ export default class User extends Component<Props> {
      
  
       <ImageBackground
-        source={require('../../../assets/images/background.png')}
+        source={require('../../assets/images/background.png')}
         imageStyle={{resizeMode: 'stretch'}}
         style={{width: '100%', height: '100%'}}>
    <ScrollView>

@@ -12,6 +12,7 @@ export default function ComponentsScreen(props) {
       style={styles.container}
       contentContainerStyle={{ paddingBottom: 20 }}
     >
+      <Text style={styles.componentSectionHeader}>this page just for test and will be deleted</Text>
       <View style={styles.componentsSection}>
         <Text style={styles.componentSectionHeader}>Radio Group</Text>
 

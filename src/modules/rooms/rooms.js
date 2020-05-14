@@ -3,6 +3,8 @@ import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity
 Button,Alert,Image,ImageBackground,StatusBar ,ScrollView} from 'react-native';
 import axios from 'axios';
 import DropdownMenu from 'react-native-dropdown-menu';
+import Addimages from '../../addimages/importimage'
+
 export default class Rooms extends Component<Props> {
 
 constructor(props) {
@@ -158,7 +160,9 @@ render() {
          </View>
   
          
-         <Text style={styles.signUpTextt}>upload images</Text>
+         <View style={styles.inputContainer}>
+    <Addimages></Addimages>
+    </View>
          <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="Name"

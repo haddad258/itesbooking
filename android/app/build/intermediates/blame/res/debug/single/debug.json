@@ -1596,6 +1596,10 @@
         "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/04c0bc8e0c867360895e167943869649/res/layout/abc_search_dropdown_item_icons_2line.xml"
     },
     {
+        "merged": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/res/merged/debug/xml_provider_paths.xml.flat",
+        "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/packaged_res/debug/xml/provider_paths.xml"
+    },
+    {
         "merged": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/04c0bc8e0c867360895e167943869649/res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
@@ -2282,6 +2286,10 @@
     {
         "merged": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/a576f2aca6f482e436f583981aa7b8f5/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/res/merged/debug/layout_list_item.xml.flat",
+        "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/packaged_res/debug/layout/list_item.xml"
     },
     {
         "merged": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",

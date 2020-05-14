@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
-
+import Addimages from '../../addimages/importimage'
 
 export default class User extends Component<Props> {
 
@@ -93,7 +93,10 @@ export default class User extends Component<Props> {
     <View style={styles.container}>
  
     <Text style={styles.input}>Add user</Text>
- 
+    <View style={styles.inputContainer}>
+    <Addimages></Addimages>
+    </View>
+   
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="firstName"

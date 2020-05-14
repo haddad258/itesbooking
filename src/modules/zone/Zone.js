@@ -86,58 +86,8 @@ export default class Zone extends Component<Props> {
         imageStyle={{resizeMode: 'stretch'}}
         style={{width: '100%', height: '100%'}}>
    <ScrollView>
-     <StatusBar
-        backgroundColor="#0B7600"
-        barStyle="light-content"/>
- 
-    <View style={styles.container}>
- 
-    <Text style={styles.input}>Registeration Zone</Text>
- 
-    <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="firstName"
-     keyboardType="email-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(firstName) => this.setState({firstName})}/>
-    </View>
-    <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="lastName"
-     keyboardType="email-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(lastName) => this.setState({lastName})}/>
-    </View>
- 
-    <View style={styles.inputContainer}>
-     <TextInput style={styles.inputs}
-      placeholder="Email"
-      keyboardType="email-address"
-      underlineColorAndroid='transparent'
-      onChangeText={(email) => this.setState({email})}/>
-    </View>
-    <View style={styles.inputContainer}>
-     <TextInput style={styles.inputs}
-      placeholder="Phone"
-      keyboardType="email-address"
-      underlineColorAndroid='transparent'
-      onChangeText={(phone) => this.setState({phone})}/>
-    </View>
- 
-    <View style={styles.inputContainer}>
- 
-      <TextInput style={styles.inputs}
-       placeholder="Password"
-       secureTextEntry={true}
-       underlineColorAndroid='transparent'
-       onChangeText={(password) => this.setState({password})}/>
-    </View>
- 
-    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
-      <Text style={styles.signUpText}>Sign up</Text>
-    </TouchableOpacity>
- 
-   </View>
+   <Text style={styles.signUpText}>not availble in this veriion</Text>
+
    </ScrollView>
    </ImageBackground>
    

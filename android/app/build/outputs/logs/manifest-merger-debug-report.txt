@@ -6,6 +6,7 @@ INJECTED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/mai
 INJECTED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from [hermes-debug.aar] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/f42f9853001cbe3521ddbc3ae01e15df/AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-21:12
 MERGED from [:react-native-community_masked-view] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-localize] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-localize/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
@@ -80,6 +81,8 @@ application
 ADDED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml:6:5-24:19
 MERGED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml:6:5-24:19
 MERGED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml:6:5-24:19
+MERGED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
+MERGED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
 MERGED from [com.facebook.react:react-native:0.61.5] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/1dd77b8356fb4d02db0e44d59213022e/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.61.5] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/1dd77b8356fb4d02db0e44d59213022e/AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.1.0] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/b06fecedb46cc99f3268c10e6bc77ed0/AndroidManifest.xml:22:5-20
@@ -146,6 +149,8 @@ INJECTED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/mai
 INJECTED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/AndroidManifest.xml
 MERGED from [hermes-debug.aar] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/f42f9853001cbe3521ddbc3ae01e15df/AndroidManifest.xml:5:5-44
 MERGED from [hermes-debug.aar] /home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/f42f9853001cbe3521ddbc3ae01e15df/AndroidManifest.xml:5:5-44
+MERGED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
@@ -250,3 +255,19 @@ uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/debug/AndroidManifest.xml:5:5-77
 	android:name
 		ADDED from /home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/debug/AndroidManifest.xml:5:22-75
+provider#com.imagepicker.FileProvider
+ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:10:9-18:20
+	android:grantUriPermissions
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-47
+	android:authorities
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-60
+	android:exported
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-37
+	android:name
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-56
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-17:58
+	android:resource
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:17-55
+	android:name
+		ADDED from [:react-native-image-picker] /home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:17-67

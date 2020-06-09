@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/home/haddadrafik258/Pictures/itesbooking/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
+                {
+                    "source": "/home/haddadrafik258/Pictures/itesbooking/android/app/build/generated/res/resValues/debug/values/generated.xml",
+                    "from": {
+                        "startLines": "6,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "157,221",
+                        "endColumns": "63,68",
+                        "endOffsets": "216,285"
+                    },
+                    "to": {
+                        "startLines": "632,633",
+                        "startColumns": "4,4",
+                        "startOffsets": "40300,40364",
+                        "endColumns": "63,68",
+                        "endOffsets": "40359,40428"
+                    }
+                },
                 {
                     "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/84e84f5069238ff7cd07d01eca60859a/res/values/values.xml",
                     "from": {
@@ -59,7 +76,7 @@
                     }
                 },
                 {
-                    "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/1dd77b8356fb4d02db0e44d59213022e/res/values/values.xml",
+                    "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/3472e7b189cc8dbfc98132f1f1659108/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,71,74,77,80,83,87,91,94,97,100,103,104,105,112,119,122,125,128,134",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -78,7 +95,7 @@
                     }
                 },
                 {
-                    "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/packaged_res/debug/values/values.xml",
+                    "source": "/home/haddadrafik258/Pictures/itesbooking/node_modules/react-native-image-picker/android/build/intermediates/packaged_res/debug/values/values.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -135,26 +152,7 @@
                     }
                 },
                 {
-                    "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "54",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "232"
-                    },
-                    "to": {
-                        "startLines": "792",
-                        "startColumns": "4",
-                        "startOffsets": "57888",
-                        "endLines": "795",
-                        "endColumns": "12",
-                        "endOffsets": "58066"
-                    }
-                },
-                {
-                    "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/src/main/res/values/strings.xml",
+                    "source": "/home/haddadrafik258/Pictures/itesbooking/android/app/src/main/res/values/strings.xml",
                     "from": {
                         "startLines": "1",
                         "startColumns": "4",
@@ -266,20 +264,22 @@
                     }
                 },
                 {
-                    "source": "/home/haddadrafik258/Desktop/myapp/itesbooking/android/app/build/generated/res/resValues/debug/values/generated.xml",
+                    "source": "/home/haddadrafik258/Pictures/itesbooking/android/app/src/main/res/values/styles.xml",
                     "from": {
-                        "startLines": "6,7",
-                        "startColumns": "4,4",
-                        "startOffsets": "157,221",
-                        "endColumns": "63,68",
-                        "endOffsets": "216,285"
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "54",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "232"
                     },
                     "to": {
-                        "startLines": "632,633",
-                        "startColumns": "4,4",
-                        "startOffsets": "40300,40364",
-                        "endColumns": "63,68",
-                        "endOffsets": "40359,40428"
+                        "startLines": "792",
+                        "startColumns": "4",
+                        "startOffsets": "57888",
+                        "endLines": "795",
+                        "endColumns": "12",
+                        "endOffsets": "58066"
                     }
                 },
                 {

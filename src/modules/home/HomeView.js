@@ -44,7 +44,7 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
               </Text>
 
           <Text size={30} bold white style={styles.title}>
-            Room 4 B_A1 F_6
+            Room 2 B_A3 F_
           </Text>
         </View>
         <View style={[styles.section, styles.sectionLarge]}>

@@ -3,8 +3,11 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
-
-
+import Addimages from '../../addimages/importimage'
+import {  RadioGroup, Dropdown } from '../../components';
+import { Value } from 'react-native-reanimated';
+var selectbuildingid =[]
+var selectbuildingname = []
 export default class Zone extends Component<Props> {
 
   constructor(props) {
@@ -13,39 +16,36 @@ export default class Zone extends Component<Props> {
      this.registerCall = this.registerCall.bind(this);
      var {height, width} = Dimensions.get('window');
      this.state = {screenHeight: height, screenWidth: width,
-                  firstName: '',
-                  lastName:'',
-                  email : '',
-                  password: '',
-                  phone:'',
+                  description: '',
+                  idType:'',
+                  name : '',
+                  idBuilding:'',
                   status: '',
                   wholeResult: '',
-                  baseUrl: 'http://192.168.43.236:9970/sib-api/common/user' };
+                  baseUrl: 'http://192.168.1.176:9970/sib-api/common/zones' };
  
     }
  
  onClickListener = (viewId) => {
-         // Alert.alert(this.state.firstName+" "+this.state.email+" "+this.state.password , "View_id "+viewId);
-         if(this.state.firstName || this.state.firstName != " "){
-           if(this.state.lastName){            
-          if(this.state.email){
-           if(this.state.password){
-             if(this.state.phone){
+         // Alert.alert(this.state.description+" "+this.state.name+" "+this.state.password , "View_id "+viewId);
+         if(this.state.description || this.state.description != " "){
+           if(this.state.idType){            
+          if(this.state.name){
+          
+             if(this.state.idBuilding){
                this.registerCall();
             }else{
-           Alert.alert("Please enter email");
+            Alert.alert("Please enter name");
+          
           }
-          }else{
-         Alert.alert("Please enter email");
-         }
        }else{
-     Alert.alert("Please enter username");
+     Alert.alert("Please enter idbulding");
        }
     }else{
-     Alert.alert("Please enter lastname");
+     Alert.alert("Please enter idType");
     }
    }else{
-     Alert.alert("Please enter username");
+     Alert.alert("Please enter user");
    }   
    
   }
@@ -54,9 +54,22 @@ export default class Zone extends Component<Props> {
    var that = this;
    var url = that.state.baseUrl;
     console.log("url:"+url);
-   let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
-   console.log(body)
-   axios.post(url , body ) .then(function (response) {
+   let body= {"description": this.state.description, "idType":this.state.idType, "name": this.state.name , "idBuilding":this.state.idBuilding}
+  
+    console.log(body)
+    axios.post(url,body )
+   .then(function (response) {
+     alert("the ZONE was successfully created with id " + response.data);
+     console.log("this.reponse")
+   })
+   .catch(function (error) {
+     alert("result:"+error)
+   }); 
+   
+
+
+
+  /*  axios.post(url , body ) .then(function (response) {
          
            return response.json();
          }).then(function (result) {  
@@ -74,10 +87,20 @@ export default class Zone extends Component<Props> {
  }).catch(function (error) {
     console.log("-------- error ------- "+error);
     alert("result:"+error)
-  });
+  }); */
  }
  
  render() {
+  axios.get('http://192.168.1.176:9970/sib-api/common/buildings/')
+  .then(function (response) {
+    // handle success
+    for(var i=0;i<response.data.length; i++){
+     
+      selectbuildingid.push(response.data[i].id)
+      selectbuildingname.push(response.data[i].name)
+
+    }
+  })
    return (
      
  
@@ -86,8 +109,55 @@ export default class Zone extends Component<Props> {
         imageStyle={{resizeMode: 'stretch'}}
         style={{width: '100%', height: '100%'}}>
    <ScrollView>
-   <Text style={styles.signUpText}>not availble in this veriion</Text>
-
+     <StatusBar
+        backgroundColor="#0B7600"
+        barStyle="light-content"/>
+ 
+    <View style={styles.container}>
+ 
+    <Text style={styles.input}>Add Zone</Text>
+    <View style={styles.inputContainer}>
+    <Addimages></Addimages>
+    </View>
+    <View style={styles.inputContainer}>
+     <TextInput style={styles.inputs}
+      placeholder="name"
+      keyboardname="name-address"
+      underlineColorAndroid='transparent'
+      onChangeText={(name) => this.setState({name})}/>
+    </View>
+   
+    <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="description"
+     keyboardname="name-address"
+     underlineColorAndroid='transparent'
+     onChangeText={(description) => this.setState({description})}/>
+    </View>
+    <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idType"
+     keyboardname="name-address"
+     underlineColorAndroid='transparent'
+     onChangeText={(idType) => this.setState({idType})}/>
+    </View>
+ 
+   
+    
+    <View style={styles.inputContainer}>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  }}
+          items={selectbuildingname}
+        
+        ></Dropdown>
+      </View>
+ 
+    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
+      <Text style={styles.signUpText}>Sign up</Text>
+    </TouchableOpacity>
+ 
+   </View>
    </ScrollView>
    </ImageBackground>
    

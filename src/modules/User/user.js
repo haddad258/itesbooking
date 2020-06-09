@@ -20,7 +20,8 @@ export default class User extends Component<Props> {
                   phone:'',
                   status: '',
                   wholeResult: '',
-                  baseUrl: 'http://192.168.1.21:9970/sib-api/common/user' };
+                  userLogin:'',
+                  baseUrl: 'http://192.168.1.176:9970/sib-api/common/users' };
  
     }
  
@@ -39,7 +40,7 @@ export default class User extends Component<Props> {
          Alert.alert("Please enter email");
          }
        }else{
-     Alert.alert("Please enter username");
+     Alert.alert("Please enter ");
        }
     }else{
      Alert.alert("Please enter lastname");
@@ -54,17 +55,25 @@ export default class User extends Component<Props> {
    var that = this;
    var url = that.state.baseUrl;
     console.log("url:"+url);
-   let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
-   console.log(body)
-   axios.post(url , body ) .then(function (response) {
+   let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,"userLogin":this.state.userLogin}
+   
+   axios.post(url,body )
+  .then(function (response) {
+    alert("the user was successfully created with userLogin  " + response.data.userLogin  );
+    console.log(response.data)
+  })
+  .catch(function (error) {
+    alert("result:"+error)
+  });
+/*    axios.post(url , body ) .then(function (response) {
          
            return response.json();
          }).then(function (result) {  
             // console.log(result);
             if(!result.error){
-             that.setState({ status: result.error,
+            /*  that.setState({ status: result.error,
                              wholeResult: result,
-                          });
+                          }); 
              Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
              console.log(that.state.wholeResult.user.uid);
          }else{
@@ -74,8 +83,8 @@ export default class User extends Component<Props> {
  }).catch(function (error) {
     console.log("-------- error ------- "+error);
     alert("result:"+error)
-  });
- }
+  });*/
+ } 
  
  render() {
    return (
@@ -93,10 +102,14 @@ export default class User extends Component<Props> {
     <View style={styles.container}>
  
     <Text style={styles.input}>Add user</Text>
-    <View style={styles.inputContainer}>
-    <Addimages></Addimages>
-    </View>
    
+    <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="userLogin"
+     keyboardType="email-address"
+     underlineColorAndroid='transparent'
+     onChangeText={(userLogin) => this.setState({userLogin})}/>
+    </View>
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="firstName"

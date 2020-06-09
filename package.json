@@ -13,7 +13,8 @@
     "lint:fix": "./node_modules/eslint/bin/eslint.js src --fix",
     "flow": "./node_modules/flow-bin/cli.js",
     "e2e:build": "detox build --configuration ios.sim.debug",
-    "e2e:test": "detox test --configuration ios.sim.debug"
+    "e2e:test": "detox test --configuration ios.sim.debug",
+    "watch-need-help": "echo 256 | sudo tee -a /proc/sys/fs/inotify/max_user_instances && echo 32768 | sudo tee -a /proc/sys/fs/inotify/max_queued_events && echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches && watchman shutdown-server"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.9",
@@ -24,11 +25,12 @@
     "axios": "^0.19.2",
     "global": "^4.4.0",
     "i18n-js": "^3.2.1",
+    "jest-haste-map": "^26.0.1",
     "jetifier": "^1.6.5",
     "lodash": "^4.17.13",
     "moment": "^2.24.0",
     "react": "16.9.0",
-    "react-native": "0.61.5",
+    "react-native": "^0.61.5",
     "react-native-calendars": "1.265.0",
     "react-native-dropdown-menu": "^2.0.0",
     "react-native-gesture-handler": "^1.5.0",

@@ -3,8 +3,13 @@ import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity
 Button,Alert,Image,ImageBackground,StatusBar ,ScrollView} from 'react-native';
 import axios from 'axios';
 import DropdownMenu from 'react-native-dropdown-menu';
+import {  RadioGroup, Dropdown } from '../../components';
+import { Value } from 'react-native-reanimated';
 import Addimages from '../../addimages/importimage'
-
+var selectbuildingid =[]
+var selectbuildingname = []
+var selectzoneid =[]
+var selectzonename =[]
 export default class Floors extends Component<Props> {
 
 constructor(props) {
@@ -13,9 +18,9 @@ constructor(props) {
     this.registerCall = this.registerCall.bind(this);
     var {height, width} = Dimensions.get('window');
     this.state = {screenHeight: height, screenWidth: width,
-                 address: '',
-                 city:'',
-                 country : '',
+                 idBuilding: '',
+                 idType:'',
+                 idZone : '',
                  description:'',
                  gpsLocation: '',
                  name:'',
@@ -29,24 +34,24 @@ constructor(props) {
    }
 
 onClickListener = (viewId) => {
-        // Alert.alert(this.state.address+" "+this.state.country+" "+this.state.gpsLocation , "View_id "+viewId);
-        if(this.state.address || this.state.address != " "){
-          if(this.state.city){            
-         if(this.state.country){
-          if(this.state.gpsLocation){
+        // Alert.alert(this.state.idBuilding+" "+this.state.idZone+" "+this.state.gpsLocation , "View_id "+viewId);
+        if(this.state.description || this.state.description != " "){
+          if(this.state.description){            
+         if(this.state.description){
+          if(this.state.description){
             if(this.state.description){
               this.registerCall();
            }else{
-          Alert.alert("Please enter country");
+          Alert.alert("Please enter idZone");
          }
          }else{
-        Alert.alert("Please enter country");
+        Alert.alert("Please enter idZone");
         }
       }else{
-    Alert.alert("Please enter city");
+    Alert.alert("Please enter idType");
       }
    }else{
-    Alert.alert("Please enter city");
+    Alert.alert("Please enter idType");
    }
   }else{
     Alert.alert("Please enter description");
@@ -58,7 +63,7 @@ onClickListener = (viewId) => {
   var that = this;
   var url = that.state.baseUrl;
    console.log("url:"+url);
-  let body= {"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
+  let body= {"idBuilding": this.state.idBuilding, "idType":this.state.idType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
   console.log(body)
   
   axios.post(url , body ) .then(function (response) {
@@ -83,8 +88,16 @@ onClickListener = (viewId) => {
 }
 
 render() {
-  var data = [["Select or Create Building",]];
-    var data1 = [["Select or Create Zone",]];
+  axios.get('http://192.168.1.176:9970/sib-api/common/buildings/')
+  .then(function (response) {
+    // handle success
+    for(var i=0;i<response.data.length; i++){
+     
+      selectbuildingid.push(response.data[i].id)
+      selectbuildingname.push(response.data[i].name)
+
+    }
+  })
 
   return (
     
@@ -101,55 +114,69 @@ render() {
    <View style={styles.container}>
 
    <Text style={styles.input}>Add Floor</Text>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="description"
-     keyboardType="country-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(description) => this.setState({description})}/>
-   </View>
-   <View style={styles.inputContainer}>
-   <DropdownMenu
-          style={{flex: 2}}
-          bgColor={'white'}
-          tintColor={'#AAAAAA'}
-          activityTintColor={'red'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data}
-        ></DropdownMenu>
- </View>
- <View style={styles.inputContainer}>
-   <DropdownMenu
-          style={{flex: 2}}
-          bgColor={'white'}
-          tintColor={'#AAAAAA'}
-          activityTintColor={'red'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data1}
-        ></DropdownMenu>
-             
 
-         </View>
-         <View style={styles.inputContainer}>
+   <View style={styles.inputContainer}>
     <Addimages></Addimages>
     </View>
-         <View style={styles.inputContainer}>
+
+      
+    <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="Name"
      keyboardType="Name"
      underlineColorAndroid='transparent'
      onChangeText={(name) => this.setState({name})}/>
    </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="description"
+     keyboardType="description"
+     underlineColorAndroid='transparent'
+     onChangeText={(description) => this.setState({description})}/>
+   </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idType"
+     keyboardType="description"
+     underlineColorAndroid='transparent'
+     onChangeText={(idType) => this.setState({idType})}/>
+   </View>
+   
+ 
+      
+    <View style={styles.inputContainer}>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  ;
+          
+            axios.get('http://192.168.1.176:9970/sib-api/common/zones/' )
+            .then(function (response) {
+              // handle success
+              for(var i=0;i<response.data.length; i++){
+               
+                selectzoneid.push(response.data[i].id)
+                selectzonename.push(response.data[i].name)
+          
+              }
+            })
+          
+          }}
+          items={selectbuildingname}
+
+          
+        
+        ></Dropdown>
+      </View> 
+      <View style={styles.inputContainer}>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          onSelect={(Value) => {this.state.idZone =selectzoneid[Value]  }}
+          items={selectzonename}
+        
+        ></Dropdown>
+      </View>        
+
+   
    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
      <Text style={styles.signUpText}>Sign up</Text>
    </TouchableOpacity>

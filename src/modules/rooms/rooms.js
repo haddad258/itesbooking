@@ -13,40 +13,42 @@ constructor(props) {
     this.registerCall = this.registerCall.bind(this);
     var {height, width} = Dimensions.get('window');
     this.state = {screenHeight: height, screenWidth: width,
-                 address: '',
-                 city:'',
-                 country : '',
+                 idBuilding: '',
+                 idFloor:'',
+                 idZone : '',
                  description:'',
-                 gpsLocation: '',
+                 idType: '',
                  name:'',
                  state:'',
                  postalCode:'',
                  type:'',                 
                  status: '',
                  wholeResult: '',
-                 baseUrl: 'http://192.168.1.21:9970/sib-api/common/Floor/sib-api/common/floor' };
+                baseUrl: 'http://192.168.1.21:9970/sib-api/common/rooms' 
+              };
 
    }
 
 onClickListener = (viewId) => {
-        // Alert.alert(this.state.address+" "+this.state.country+" "+this.state.gpsLocation , "View_id "+viewId);
-        if(this.state.address || this.state.address != " "){
-          if(this.state.city){            
-         if(this.state.country){
-          if(this.state.gpsLocation){
+        // Alert.alert(this.state.idBuilding+" "+this.state.idZone+" "+this.state.idType , "View_id "+viewId);
+        if(this.state.idBuilding || this.state.idBuilding != " "){
+          if(this.state.idFloor){            
+         if(this.state.idZone){
+          if(this.state.idType){
             if(this.state.description){
               this.registerCall();
+
            }else{
-          Alert.alert("Please enter country");
+          Alert.alert("Please enter idZone");
          }
          }else{
-        Alert.alert("Please enter country");
+        Alert.alert("Please enter idZone");
         }
       }else{
-    Alert.alert("Please enter city");
+    Alert.alert("Please enter idFloor");
       }
    }else{
-    Alert.alert("Please enter city");
+    Alert.alert("Please enter idFloor");
    }
   }else{
     Alert.alert("Please enter description");
@@ -58,10 +60,30 @@ onClickListener = (viewId) => {
   var that = this;
   var url = that.state.baseUrl;
    console.log("url:"+url);
-  let body= {"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
-  console.log(body)
+  //let body= {"idBuilding": this.state.idBuilding, "idFloor":this.state.idFloor, "idZone": this.state.idZone,"idType": this.state.idType , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
+  let body = {
+   
+    "deleted": true,
+    "description": this.state.description,
+    
+    "idBuilding": this.state.idBuilding,
+    "idFloor": this.state.idFloor,
+    "idType": this.state.idType,
+    "idZone": this.state.idType,
+   
   
-  axios.post(url , body ) .then(function (response) {
+    "name": this.state.name
+  }
+  console.log(body)
+  axios.post(url,body )
+  .then(function (response) {
+    alert("the room was successfully created with userLogin  "  );
+    console.log(response.data)
+  })
+  .catch(function (error) {
+    alert("result:"+error)
+  });
+/*   axios.post(url , body ) .then(function (response) {
         
           return response.json();
         }).then(function (result) {  
@@ -79,7 +101,7 @@ onClickListener = (viewId) => {
 }).catch(function (error) {
    console.log("-------- error ------- "+error);
    alert("result:"+error)
- });
+ }); */
 }
 
 render() {
@@ -102,62 +124,10 @@ render() {
    <View style={styles.container}>
 
    <Text style={styles.input}>Add Rooms</Text>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="description"
-     keyboardType="country-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(description) => this.setState({description})}/>
-   </View>
-   <View style={styles.inputContainer}>
-   <DropdownMenu
-          style={{flex: 2}}
-          bgColor={'white'}
-          tintColor={'#AAAAAA'}
-          activityTintColor={'red'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data2}
-        ></DropdownMenu>
-             
+  
+  
+ 
 
-         </View>
-   <View style={styles.inputContainer}>
-   <DropdownMenu
-          style={{flex: 2}}
-          bgColor={'white'}
-          tintColor={'#AAAAAA'}
-          activityTintColor={'red'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data}
-        ></DropdownMenu>
- </View>
- <View style={styles.inputContainer}>
-   <DropdownMenu
-          style={{flex: 2}}
-          bgColor={'white'}
-          tintColor={'#AAAAAA'}
-          activityTintColor={'red'}
-          // arrowImg={}      
-          // checkImage={}   
-          // optionTextStyle={{color: '#333333'}}
-          // titleStyle={{color: '#333333'}} 
-          // maxHeight={300} 
-          handler={(selection, row) => this.setState({text: data[selection][row]})}
-          data={data1}
-        ></DropdownMenu>
-             
-
-         </View>
   
          
          <View style={styles.inputContainer}>
@@ -170,6 +140,51 @@ render() {
      underlineColorAndroid='transparent'
      onChangeText={(name) => this.setState({name})}/>
    </View>
+
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idBuilding"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(idBuilding) => this.setState({idBuilding})}/>
+   </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idFloor"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(idFloor) => this.setState({idFloor})}/>
+   </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idZone"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(idZone) => this.setState({idZone})}/>
+   </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="idType"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(idType) => this.setState({idType})}/>
+   </View>
+
+
+
+
+
+
+
+
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="description"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(description) => this.setState({description})}/>
+   </View>
+
    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
      <Text style={styles.signUpText}>Add</Text>
    </TouchableOpacity>

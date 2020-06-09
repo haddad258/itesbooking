@@ -25,7 +25,7 @@ constructor(props) {
                  type:'',                
                  status: '',
                  wholeResult: '',
-                 baseUrl: 'http://192.168.1.21:9970/sib-api/common/Building/sib-api/common/building' };
+                 baseUrl: 'http://192.168.1.176:9970/sib-api/common/buildings' };
 
    }
 
@@ -59,10 +59,17 @@ onClickListener = (viewId) => {
   var that = this;
   var url = that.state.baseUrl;
    console.log("url:"+url);
-  let body= {"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
+  let body= {"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state}
   console.log(body)
-  
-  axios.post(url , body ) .then(function (response) {
+  axios.post(url,body )
+  .then(function (response) {
+    alert("this buillding was add in gps location " + response.data.gpsLocation + "with name " + response.data.name   );
+    console.log(response.data)
+  })
+  .catch(function (error) {
+    alert("result:"+error)
+  });
+ /*  axios.post(url , body ) .then(function (response) {
         
           return response.json();
         }).then(function (result) {  
@@ -80,7 +87,7 @@ onClickListener = (viewId) => {
 }).catch(function (error) {
    console.log("-------- error ------- "+error);
    alert("result:"+error)
- });
+ }); */
 }
 
 render() {

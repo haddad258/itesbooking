@@ -44,7 +44,7 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
               </Text>
 
           <Text size={30} bold white style={styles.title}>
-            Room 2 B_A3 F_
+            Room 2
           </Text>
         </View>
         <View style={[styles.section, styles.sectionLarge]}>
@@ -55,7 +55,7 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
           <View style={styles.priceContainer}>
             <View style={{ flexDirection: 'row' }}>
               <Text white bold size={50} style={styles.price}>
-                {isExtended ? 'Libre' : 'Libre'}
+                {isExtended ? 'Libre' : 'reserved'}
               </Text>
             </View>
             <TouchableOpacity

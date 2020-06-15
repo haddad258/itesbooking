@@ -4,6 +4,8 @@ import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity
 Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
 import Addimages from '../../addimages/importimage'
+var urlcnst = require('../../const/api')()+'sib-api/common/users'
+
 
 export default class User extends Component<Props> {
 
@@ -21,7 +23,7 @@ export default class User extends Component<Props> {
                   status: '',
                   wholeResult: '',
                   userLogin:'',
-                  baseUrl: 'http://192.168.1.176:9970/sib-api/common/users' };
+                  };
  
     }
  
@@ -55,15 +57,26 @@ export default class User extends Component<Props> {
    var that = this;
    var url = that.state.baseUrl;
     console.log("url:"+url);
-   let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,"userLogin":this.state.userLogin}
-   
-   axios.post(url,body )
+  // let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,"userLogin":this.state.userLogin}
+  let body= {
+    "email": this.state.email,
+    "emailVerified": true,
+    "email_verified": true,
+    "firstName": this.state.firstName,
+    "id": 0,
+    "lastName": this.state.lastName,
+    "password": this.state.password,
+    "phone": parseInt(this.state.phone),
+    "userLogin": this.state.userLogin
+  }
+   axios.post(urlcnst,body )
   .then(function (response) {
     alert("the user was successfully created with userLogin  " + response.data.userLogin  );
     console.log(response.data)
   })
   .catch(function (error) {
     alert("result:"+error)
+    console.log(body)
   });
 /*    axios.post(url , body ) .then(function (response) {
          

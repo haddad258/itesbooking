@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image ,ScrollView} from 'react-native';
 
 import { colors, fonts } from '../../styles';
 
@@ -12,6 +12,7 @@ const profileIcon = require('../../assets/images/pages/profile.png');
 
 export default function PagesScreen(props) {
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.row}>
         <TouchableOpacity
@@ -140,7 +141,64 @@ export default function PagesScreen(props) {
           <Text style={styles.itemTextt}>Zone</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.row}>
+
+      <TouchableOpacity
+          onPress={() => props.navigation.navigate('list_user')}
+          style={styles.item}
+        >
+          <Image
+            resizeMode="contain"
+            source={settings}
+            style={styles.itemImage}
+          />
+          <Text style={styles.itemTextt}>show list user</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('list_building')}
+          style={styles.item}
+        >
+          <Image
+            resizeMode="contain"
+            source={settings}
+            style={styles.itemImage}
+          />
+          <Text style={styles.itemTextt}>show list Building</Text>
+        </TouchableOpacity>
+
+
+
+      </View>
+      <View style={styles.row}>
+
+<TouchableOpacity
+    onPress={() => props.navigation.navigate('list_floors')}
+    style={styles.item}
+  >
+    <Image
+      resizeMode="contain"
+      source={settings}
+      style={styles.itemImage}
+    />
+    <Text style={styles.itemTextt}>show list Floors</Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    onPress={() => props.navigation.navigate('list_zone')}
+    style={styles.item}
+  >
+    <Image
+      resizeMode="contain"
+      source={settings}
+      style={styles.itemImage}
+    />
+    <Text style={styles.itemTextt}>show list Zone</Text>
+  </TouchableOpacity>
+
+
+
+</View>
     </View>
+    </ScrollView>
   );
 }
 

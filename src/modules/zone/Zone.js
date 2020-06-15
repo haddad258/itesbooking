@@ -5,7 +5,9 @@ Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
 import Addimages from '../../addimages/importimage'
 import {  RadioGroup, Dropdown } from '../../components';
-import { Value } from 'react-native-reanimated';
+var urlcnst = require('../../const/api')()+'sib-api/common/zones'
+var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
+
 var selectbuildingid =[]
 var selectbuildingname = []
 export default class Zone extends Component<Props> {
@@ -22,7 +24,7 @@ export default class Zone extends Component<Props> {
                   idBuilding:'',
                   status: '',
                   wholeResult: '',
-                  baseUrl: 'http://192.168.1.176:9970/sib-api/common/zones' };
+                   };
  
     }
  
@@ -51,13 +53,10 @@ export default class Zone extends Component<Props> {
   }
  
   registerCall(){
-   var that = this;
-   var url = that.state.baseUrl;
-    console.log("url:"+url);
+  
    let body= {"description": this.state.description, "idType":this.state.idType, "name": this.state.name , "idBuilding":this.state.idBuilding}
   
-    console.log(body)
-    axios.post(url,body )
+    axios.post(urlcnst,body )
    .then(function (response) {
      alert("the ZONE was successfully created with id " + response.data);
      console.log("this.reponse")
@@ -91,7 +90,7 @@ export default class Zone extends Component<Props> {
  }
  
  render() {
-  axios.get('http://192.168.1.176:9970/sib-api/common/buildings/')
+  axios.get(urlbull)
   .then(function (response) {
     // handle success
     for(var i=0;i<response.data.length; i++){

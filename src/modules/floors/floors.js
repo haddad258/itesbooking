@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar ,ScrollView} from 'react-native';
 import axios from 'axios';
-import DropdownMenu from 'react-native-dropdown-menu';
+
 import {  RadioGroup, Dropdown } from '../../components';
-import { Value } from 'react-native-reanimated';
+
 import Addimages from '../../addimages/importimage'
+var urlcnst = require('../../const/api')() +'sib-api/common/floors'
+var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
+var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
+
 var selectbuildingid =[]
 var selectbuildingname = []
 var selectzoneid =[]
@@ -29,7 +33,7 @@ constructor(props) {
                  type:'',                
                  status: '',
                  wholeResult: '',
-                 baseUrl: 'http://192.168.1.21:9970/sib-api/common/Floor/sib-api/common/floor' };
+                };
 
    }
 
@@ -60,13 +64,21 @@ onClickListener = (viewId) => {
  }
 
  registerCall(){
-  var that = this;
-  var url = that.state.baseUrl;
-   console.log("url:"+url);
-  let body= {"idBuilding": this.state.idBuilding, "idType":this.state.idType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
-  console.log(body)
   
-  axios.post(url , body ) .then(function (response) {
+  
+  
+  let body= {"idBuilding": this.state.idBuilding, "idType":this.state.idType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
+  axios.post(urlcnst,body )
+   .then(function (response) {
+     alert("the floor was successfully created with id " + response.data.name);
+     console.log("this.reponse")
+   })
+   .catch(function (error) {
+     alert("result:"+error)
+   }); 
+   
+  
+/*   axios.post(urlcnst , body ) .then(function (response) {
         
           return response.json();
         }).then(function (result) {  
@@ -84,18 +96,16 @@ onClickListener = (viewId) => {
 }).catch(function (error) {
    console.log("-------- error ------- "+error);
    alert("result:"+error)
- });
-}
-
+ });*/
+} 
+ 
 render() {
-  axios.get('http://192.168.1.176:9970/sib-api/common/buildings/')
-  .then(function (response) {
-    // handle success
-    for(var i=0;i<response.data.length; i++){
-     
-      selectbuildingid.push(response.data[i].id)
-      selectbuildingname.push(response.data[i].name)
-
+  
+  axios.get(urlbull)
+  .then(function (response) {    
+    for(var i=0;i<response.data.length; i++){     
+      selectbuildingid.push(response.data[i].id);
+      selectbuildingname.push(response.data[i].name);
     }
   })
 
@@ -149,7 +159,7 @@ render() {
           style={{ width: 350, alignSelf: 'center' }}
           onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  ;
           
-            axios.get('http://192.168.1.176:9970/sib-api/common/zones/' )
+            axios.get(urlbzone+selectbuildingid[Value])
             .then(function (response) {
               // handle success
               for(var i=0;i<response.data.length; i++){

@@ -6,7 +6,7 @@ import {
   Image,
 } from 'react-native';
 import axios from 'axios';
-const API_URL = 'http://192.168.1.21:9970/sib-api/common/user/list';
+const API_URL = 'http://197.27.92.203:9970/sib-api/common/users/';
 
 export default class Showuser extends Component {
 

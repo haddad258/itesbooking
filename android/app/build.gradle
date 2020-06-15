@@ -1,4 +1,4 @@
-apply plugin: "com.android.application"
+tre example apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 

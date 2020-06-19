@@ -2,9 +2,20 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar ,ScrollView} from 'react-native';
 import axios from 'axios';
+import {  RadioGroup, Dropdown } from '../../components';
+
 import DropdownMenu from 'react-native-dropdown-menu';
 import Addimages from '../../addimages/importimage'
-
+var urlconst = require('../../const/api')() +'/sib-api/common/rooms'
+var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
+var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
+var urlbfloors =require('../../const/api')()+'/sib-api/common/floors/by-zone/'
+var selectbuildingid =[]
+var selectbuildingname = []
+var selectzoneid =[]
+var selectzonename =[]
+var selectfloorsid=[]
+var selectfloors=[]
 export default class Rooms extends Component<Props> {
 
 constructor(props) {
@@ -63,7 +74,7 @@ onClickListener = (viewId) => {
   //let body= {"idBuilding": this.state.idBuilding, "idFloor":this.state.idFloor, "idZone": this.state.idZone,"idType": this.state.idType , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
   let body = {
    
-    "deleted": true,
+    
     "description": this.state.description,
     
     "idBuilding": this.state.idBuilding,
@@ -75,7 +86,7 @@ onClickListener = (viewId) => {
     "name": this.state.name
   }
   console.log(body)
-  axios.post(url,body )
+  axios.post(urlconst,body )
   .then(function (response) {
     alert("the room was successfully created with userLogin  "  );
     console.log(response.data)
@@ -105,9 +116,13 @@ onClickListener = (viewId) => {
 }
 
 render() {
-  var data = [["Select or Create Building",]];
-    var data1 = [["Select or Create Zone",]];
-    var data2 = [["Select or Create Floor",]];
+  axios.get(urlbull)
+  .then(function (response) {    
+    for(var i=0;i<response.data.length; i++){     
+      selectbuildingid.push(response.data[i].id);
+      selectbuildingname.push(response.data[i].name);
+    }
+  })
 
   return (
     
@@ -141,27 +156,9 @@ render() {
      onChangeText={(name) => this.setState({name})}/>
    </View>
 
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idBuilding"
-     keyboardType="idZone-idBuilding"
-     underlineColorAndroid='transparent'
-     onChangeText={(idBuilding) => this.setState({idBuilding})}/>
-   </View>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idFloor"
-     keyboardType="idZone-idBuilding"
-     underlineColorAndroid='transparent'
-     onChangeText={(idFloor) => this.setState({idFloor})}/>
-   </View>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idZone"
-     keyboardType="idZone-idBuilding"
-     underlineColorAndroid='transparent'
-     onChangeText={(idZone) => this.setState({idZone})}/>
-   </View>
+ 
+  
+  
    <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="idType"
@@ -184,6 +181,61 @@ render() {
      underlineColorAndroid='transparent'
      onChangeText={(description) => this.setState({description})}/>
    </View>
+
+   <View style={styles.inputContainer}>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select Building'}     
+          onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  ;
+          
+            axios.get(urlbzone+selectbuildingid[Value])
+            .then(function (response) {
+              // handle success
+              for(var i=0;i<response.data.length; i++){
+               
+                selectzoneid.push(response.data[i].id)
+                selectzonename.push(response.data[i].name)
+          
+              }
+            })
+          
+          }}
+          items={selectbuildingname}
+
+          
+        
+        ></Dropdown>
+      </View> 
+      <View style={styles.inputContainer}>
+    <Dropdown
+     placeholder={'select zone'}
+          style={{ width: 350, alignSelf: 'center' }}
+          onSelect={(Value) => {this.state.idZone =selectzoneid[Value] ;
+            axios.get(urlbfloors+selectzoneid[Value])
+            .then(function (response) {
+              // handle success
+              for(var i=0;i<response.data.length; i++){
+               
+                selectfloorsid.push(response.data[i].id)
+                selectfloors.push(response.data[i].name)
+          
+              }
+            })
+          
+          }}
+          items={selectzonename}
+        
+        ></Dropdown>
+      </View> 
+      <View style={styles.inputContainer}>
+    <Dropdown
+     placeholder={'select floor'}
+          style={{ width: 350, alignSelf: 'center' }}
+          onSelect={(Value) => {this.state.idFloor =selectfloorsid[Value]  }}
+          items={selectfloors}
+        
+        ></Dropdown>
+      </View>
 
    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
      <Text style={styles.signUpText}>Add</Text>

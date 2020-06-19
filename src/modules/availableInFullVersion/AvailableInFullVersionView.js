@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
+import Time from './Time'
 
 
 export default class AvailableInFullVersionScreen extends Component<Props> {
@@ -20,42 +21,63 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
                   phone:'',
                   status: '',
                   wholeResult: '',
+                  dateS:'',
+                  dateE:'',
+                  Userlogin:'',
+                  
                   baseUrl: 'http://192.168.43.236:9970/sib-api/common/user' };
  
     }
  
  onClickListener = (viewId) => {
          // Alert.alert(this.state.firstName+" "+this.state.email+" "+this.state.password , "View_id "+viewId);
-         if(this.state.firstName || this.state.firstName != " "){
-           if(this.state.lastName){            
-          if(this.state.email){
-           if(this.state.password){
-             if(this.state.phone){
-               this.registerCall();
+      
+         this.registerCall(); 
+        
+        /*    if(this.state.Userlogin){
+             if(this.state.password){
+              
             }else{
-           Alert.alert("Please enter email");
+           Alert.alert("Please enter Userlogin & password");
           }
           }else{
-         Alert.alert("Please enter email");
-         }
-       }else{
-     Alert.alert("Please enter username");
-       }
-    }else{
-     Alert.alert("Please enter lastname");
-    }
-   }else{
-     Alert.alert("Please enter username");
-   }   
+         Alert.alert("Please enter Userlogin & password");
+         } */
+      
+  
+  
    
   }
- 
+  handeldateS(date){
+
+    this.setState({dateS: date});
+  }
+  handeldateE(date){
+
+    this.setState({dateE: date});
+  }
   registerCall(){
    var that = this;
    var url = that.state.baseUrl;
     console.log("url:"+url);
-   let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
-   console.log(body)
+   //let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
+   let body ={
+    "endDateTime": this.state.dateE,
+    "roomName": this.state.password,
+    "startDateTime": this.state.dateS,
+    "userLogin": this.state.userLogin
+  }
+  console.log(body)
+  axios.post('http://192.168.1.22:9880/sib-api/booking/bookings',body )
+   .then(function (response) {
+     alert("the floor was successfully created with id " + response.data);
+     console.log("this.reponse")
+   })
+   .catch(function (error) {
+     alert("result:"+error)
+   }); 
+   
+  /*  console.log(body)
    axios.post(url , body ) .then(function (response) {
          
            return response.json();
@@ -74,8 +96,8 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
  }).catch(function (error) {
     console.log("-------- error ------- "+error);
     alert("result:"+error)
-  });
- }
+  });*/
+ } 
  
  render() {
    return (
@@ -86,6 +108,8 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
         imageStyle={{resizeMode: 'stretch'}}
         style={{width: '100%', height: '100%'}}>
    <ScrollView>
+
+     
      <StatusBar
         backgroundColor="#0B7600"
         barStyle="light-content"/>
@@ -93,36 +117,21 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
     <View style={styles.container}>
  
     <Text style={styles.input}>Reserve</Text>
- 
+    <Text>Start Date Booking </Text>
+    <Time brand={this.handeldateS.bind(this)}></Time>
+    <Text>End Date Booking </Text>
+    <Time brand={this.handeldateE.bind(this)}></Time>
+   
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
-     placeholder="firstName"
+     placeholder="UserLogin"
      keyboardType="email-address"
      underlineColorAndroid='transparent'
-     onChangeText={(firstName) => this.setState({firstName})}/>
+     onChangeText={(UserLogin) => this.setState({UserLogin})}/>
     </View>
-    <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="lastName"
-     keyboardType="email-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(lastName) => this.setState({lastName})}/>
-    </View>
+   
  
-    <View style={styles.inputContainer}>
-     <TextInput style={styles.inputs}
-      placeholder="Email"
-      keyboardType="email-address"
-      underlineColorAndroid='transparent'
-      onChangeText={(email) => this.setState({email})}/>
-    </View>
-    <View style={styles.inputContainer}>
-     <TextInput style={styles.inputs}
-      placeholder="Phone"
-      keyboardType="email-address"
-      underlineColorAndroid='transparent'
-      onChangeText={(phone) => this.setState({phone})}/>
-    </View>
+  
  
     <View style={styles.inputContainer}>
  

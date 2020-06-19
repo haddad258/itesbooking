@@ -12,8 +12,29 @@ import {
 import { colors, fonts } from '../../styles';
 
 import { RadioGroup, GridRow } from '../../components';
+import axios from 'axios'
+const listData = [
+  {
+    id: 1,
+    brand: 'Einstein',
+    title: 'meeting room',
+    subtitle: 'Limited Edition',
+    price: '12:00',
+    badge: 'NEW',
+    badgeColor: '#3cd39f',
+    image:
+      'https://i.ibb.co/vV7yp07/salle.jpg',
+  },
+
+]
+var imagestatic = 'https://i.ibb.co/vV7yp07/salle.jpg'
 
 export default class GridsScreen extends React.Component {
+
+state={
+  listofroom : []
+}
+
   _getRenderItemFunction = () =>
     [this.renderRowOne, this.renderRowTwo, this.renderRowThree][
       this.props.tabIndex
@@ -31,18 +52,32 @@ export default class GridsScreen extends React.Component {
       <TouchableOpacity key={item.id} onPress={() => this._openArticle(item)}>
         <View style={styles.itemOneContainer}>
           <View style={styles.itemOneImageContainer}>
-            <Image style={styles.itemOneImage} source={{ uri: item.image }} />
+            <Image style={styles.itemOneImage} source={{ uri: imagestatic }} />
           </View>
           <View style={styles.itemOneContent}>
             <Text style={styles.itemOneTitle} numberOfLines={1}>
-              {item.title}
+              {item.name}
             </Text>
             <Text
               style={styles.itemOneSubTitle}
               styleName="collapsible"
               numberOfLines={3}
             >
-              {item.subtitle}
+              floors: {item.idFloor}
+            </Text>
+            <Text
+              style={styles.itemOneSubTitle}
+              styleName="collapsible"
+              numberOfLines={4}
+            >
+              Building: {item.idBuilding}
+            </Text>
+            <Text
+              style={styles.itemOneSubTitle}
+              styleName="collapsible"
+              numberOfLines={4}
+            >
+              state: {item.state}
             </Text>
             <Text style={styles.itemOnePrice} numberOfLines={1}>
               {item.price}
@@ -65,11 +100,11 @@ export default class GridsScreen extends React.Component {
       onPress={() => this._openArticle(item)}
     >
       <View style={styles.itemTwoContent}>
-        <Image style={styles.itemTwoImage} source={{ uri: item.image }} />
+        <Image style={styles.itemTwoImage} source={{ uri: imagestatic }} />
         <View style={styles.itemTwoOverlay} />
-        <Text style={styles.itemTwoTitle}>{item.title}</Text>
-        <Text style={styles.itemTwoSubTitle}>{item.subtitle}</Text>
-        <Text style={styles.itemTwoPrice}>{item.price}</Text>
+        <Text style={styles.itemTwoTitle}>{item.name}</Text>
+        <Text style={styles.itemTwoSubTitle}>{item.idBuilding}</Text>
+        <Text style={styles.itemTwoPrice}>{item.idFloor}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -81,13 +116,13 @@ export default class GridsScreen extends React.Component {
       onPress={() => this._openArticle(item)}
     >
       <View style={styles.itemThreeSubContainer}>
-        <Image source={{ uri: item.image }} style={styles.itemThreeImage} />
+        <Image source={{ uri: imagestatic }} style={styles.itemThreeImage} />
         <View style={styles.itemThreeContent}>
-          <Text style={styles.itemThreeBrand}>{item.brand}</Text>
+          <Text style={styles.itemThreeBrand}>{item.name}</Text>
           <View>
-            <Text style={styles.itemThreeTitle}>{item.title}</Text>
+            <Text style={styles.itemThreeTitle}>{item.idBuilding}</Text>
             <Text style={styles.itemThreeSubtitle} numberOfLines={1}>
-              {item.subtitle}
+              {item.idFloor}
             </Text>
           </View>
           <View style={styles.itemThreeMetaContainer}>
@@ -113,12 +148,28 @@ export default class GridsScreen extends React.Component {
       <View style={styles.itemThreeHr} />
     </TouchableOpacity>
   );
+  componentDidMount(){
+
+ 
+    axios.get('http://192.168.1.22:9875/sib-api/common/rooms').then(response => response.data)
+    .then((data) => {
+      
+   //   tableData.push(Object.values(data[0]))
+   this.setState({listofroom: data})
+
+   
+
+  
+       
+     })
+    }
 
   render() {
+    console.log(this.state.listofroom)
     const groupedData =
       this.props.tabIndex === 0
-        ? GridRow.groupByRows(this.props.data, 2)
-        : this.props.data;
+        ? GridRow.groupByRows(this.state.listofroom, 2)
+        : this.state.listofroom;
 
     return (
       <View style={styles.container}>

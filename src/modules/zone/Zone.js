@@ -145,6 +145,7 @@ export default class Zone extends Component<Props> {
     
     <View style={styles.inputContainer}>
     <Dropdown
+    placeholder={'select Building'}
           style={{ width: 350, alignSelf: 'center' }}
           onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  }}
           items={selectbuildingname}

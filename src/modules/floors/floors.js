@@ -157,6 +157,7 @@ render() {
     <View style={styles.inputContainer}>
     <Dropdown
           style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select Building'}     
           onSelect={(Value) => {this.state.idBuilding =selectbuildingid[Value]  ;
           
             axios.get(urlbzone+selectbuildingid[Value])
@@ -179,6 +180,7 @@ render() {
       </View> 
       <View style={styles.inputContainer}>
     <Dropdown
+     placeholder={'select zone'}
           style={{ width: 350, alignSelf: 'center' }}
           onSelect={(Value) => {this.state.idZone =selectzoneid[Value]  }}
           items={selectzonename}

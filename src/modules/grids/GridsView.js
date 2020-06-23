@@ -13,6 +13,7 @@ import { colors, fonts } from '../../styles';
 
 import { RadioGroup, GridRow } from '../../components';
 import axios from 'axios'
+var urlgrid =require('../../const/api')()+'/sib-api/common/rooms'
 const listData = [
   {
     id: 1,
@@ -49,7 +50,7 @@ state={
 
   renderRowOne = rowData => {
     const cellViews = rowData.item.map(item => (
-      <TouchableOpacity key={item.id} onPress={() => this._openArticle(item)}>
+      <TouchableOpacity key={item.id} onPress={() => this._openArticle(item.id)}>
         <View style={styles.itemOneContainer}>
           <View style={styles.itemOneImageContainer}>
             <Image style={styles.itemOneImage} source={{ uri: imagestatic }} />
@@ -126,18 +127,18 @@ state={
             </Text>
           </View>
           <View style={styles.itemThreeMetaContainer}>
-            {item.badge && (
+            {item.idBuilding && (
               <View
                 style={[
                   styles.badge,
-                  item.badge === 'NEW' && { backgroundColor: colors.green },
+                  item.idBuilding === 1 && { backgroundColor: colors.green },
                 ]}
               >
                 <Text
                   style={{ fontSize: 10, color: colors.white }}
-                  styleName="bright"
+                  styleName="reserved"
                 >
-                  {item.badge}
+                  {item.staet} 
                 </Text>
               </View>
             )}
@@ -151,7 +152,7 @@ state={
   componentDidMount(){
 
  
-    axios.get('http://192.168.1.22:9875/sib-api/common/rooms').then(response => response.data)
+    axios.get(urlgrid).then(response => response.data)
     .then((data) => {
       
    //   tableData.push(Object.values(data[0]))

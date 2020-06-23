@@ -93,6 +93,8 @@ export default class Zone extends Component<Props> {
   axios.get(urlbull)
   .then(function (response) {
     // handle success
+     selectbuildingname.length =0;
+     selectbuildingid.length=0;
     for(var i=0;i<response.data.length; i++){
      
       selectbuildingid.push(response.data[i].id)

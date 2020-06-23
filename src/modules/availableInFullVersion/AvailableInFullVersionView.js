@@ -59,7 +59,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
   registerCall(){
    var that = this;
    var url = that.state.baseUrl;
-    console.log("url:"+url);
+    //console.log("url:"+url);
    //let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
    let body ={
     "endDateTime": this.state.dateE,
@@ -67,11 +67,11 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
     "startDateTime": this.state.dateS,
     "userLogin": this.state.userLogin
   }
-  console.log(body)
+ // console.log(body)
   axios.post('http://192.168.1.22:9880/sib-api/booking/bookings',body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data);
-     console.log("this.reponse")
+    // console.log("this.reponse")
    })
    .catch(function (error) {
      alert("result:"+error)
@@ -100,6 +100,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
  } 
  
  render() {
+   console.log(this.props.route.params.article)
    return (
      
  
@@ -116,7 +117,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
  
     <View style={styles.container}>
  
-    <Text style={styles.input}>Reserve</Text>
+   <Text style={styles.input}>Reserve {this.props.route.params.article}</Text>
     <Text>Start Date Booking </Text>
     <Time brand={this.handeldateS.bind(this)}></Time>
     <Text>End Date Booking </Text>

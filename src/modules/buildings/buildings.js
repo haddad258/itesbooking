@@ -63,7 +63,7 @@ onClickListener = (viewId) => {
   console.log(body)
   axios.post(urlcnst,body )
   .then(function (response) {
-    alert("this buillding was add in gps location " + response.data.gpsLocation + "with name " + response.data.name   );
+    Alert.alert("this buillding was add in gps location " + response.data.gpsLocation + "with name " + response.data.name   );
     console.log(response.data)
   })
   .catch(function (error) {

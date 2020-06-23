@@ -102,7 +102,9 @@ onClickListener = (viewId) => {
 render() {
   
   axios.get(urlbull)
-  .then(function (response) {    
+  .then(function (response) { 
+    selectbuildingid.length=0;
+    selectbuildingname.length=0;   
     for(var i=0;i<response.data.length; i++){     
       selectbuildingid.push(response.data[i].id);
       selectbuildingname.push(response.data[i].name);
@@ -162,7 +164,8 @@ render() {
           
             axios.get(urlbzone+selectbuildingid[Value])
             .then(function (response) {
-              // handle success
+              selectzoneid.length=0;
+              selectzonename.length=0;
               for(var i=0;i<response.data.length; i++){
                
                 selectzoneid.push(response.data[i].id)

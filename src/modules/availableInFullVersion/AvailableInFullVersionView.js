@@ -49,12 +49,13 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
    
   }
   handeldateS(date){
-
-    this.setState({dateS: date});
+    
+    this.setState({dateS: date +".422Z"});
+    
   }
   handeldateE(date){
 
-    this.setState({dateE: date});
+    this.setState({dateE: date +".422Z"});
   }
   registerCall(){
    var that = this;
@@ -62,13 +63,13 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
     //console.log("url:"+url);
    //let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
    let body ={
-    "endDateTime": this.state.dateE,
-    "roomName": this.state.password,
+    "idRoom": this.props.route.params.article,
     "startDateTime": this.state.dateS,
-    "userLogin": this.state.userLogin
+    "endDateTime": this.state.dateE,
+    "idUser": this.state.UserLogin
   }
- // console.log(body)
-  axios.post('http://192.168.1.22:9880/sib-api/booking/bookings',body )
+ console.log(body)
+  axios.post('http://192.168.1.187:9880/sib-api/booking/bookings/',body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data);
     // console.log("this.reponse")
@@ -100,7 +101,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
  } 
  
  render() {
-   console.log(this.props.route.params.article)
+  
    return (
      
  

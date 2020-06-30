@@ -12,7 +12,7 @@ export default class Time extends Component {
     //set value in state for initial date
     var today = new Date(),
     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-'+ today.getHours() ;
-
+   console.log(today)
     this.state = {date: date}
   }
 
@@ -26,9 +26,9 @@ export default class Time extends Component {
           date={this.state.date} //initial date from state
           mode="datetime" //The enum of date, datetime and time
           placeholder="select date"
-          format="DD-MM-YYYY HH:MM"
-          minDate="01-01-2016"
-          maxDate="01-01-2050"
+          format="YYYY-MM-DDTHH:MM:SS"
+          minDate="2016-01-01"
+          maxDate="2050-01-01"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{

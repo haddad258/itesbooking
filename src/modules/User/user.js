@@ -3,8 +3,10 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity,
 Button,Alert,Image,ImageBackground,StatusBar,ScrollView} from 'react-native';
 import axios from 'axios';
+import {  RadioGroup, Dropdown } from '../../components';
+
 import Addimages from '../../addimages/importimage'
-var urlcnst = require('../../const/api')()+'sib-api/common/users'
+var urlcnst = require('../../const/api')()+'/sib-api/common/users'
 
 
 export default class User extends Component<Props> {
@@ -54,20 +56,36 @@ export default class User extends Component<Props> {
   }
  
   registerCall(){
-   var that = this;
-   var url = that.state.baseUrl;
-    console.log("url:"+url);
+ 
+   
   // let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,"userLogin":this.state.userLogin}
-  let body= {
+/*   let body= {
     "email": this.state.email,
-    "emailVerified": true,
-    "email_verified": true,
+    "emailVerified": "true",
+    "email_verified": "true",
     "firstName": this.state.firstName,
-    "id": 0,
+    
     "lastName": this.state.lastName,
     "password": this.state.password,
     "phone": parseInt(this.state.phone),
-    "userLogin": this.state.userLogin
+    "userLogin": this.state.userLogin,
+    "userType": "ADMIN",
+    "idGroup": 12,
+
+  } */
+
+
+  let body={
+    "email": this.state.email,
+    "emailVerified": true,
+    "firstName": this.state.firstName,
+    
+    "idGroup": 12,
+    "lastName": this.state.lastNameing,
+    "password":this.state.password,
+    "phone": 0,
+    "userLogin": this.state.userLogin,
+    "userType": "SUPERADMIN"
   }
    axios.post(urlcnst,body )
   .then(function (response) {
@@ -100,6 +118,7 @@ export default class User extends Component<Props> {
  } 
  
  render() {
+   var typeroomname = ["Admin","User","Guest"]
    return (
      
  
@@ -116,6 +135,22 @@ export default class User extends Component<Props> {
  
     <Text style={styles.input}>Add user</Text>
    
+
+    <View style={styles.inputContainer}>
+   <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select type User'}     
+          onSelect={(Value) => { 
+         
+          
+          }}
+          items={typeroomname}
+
+          
+        
+        ></Dropdown>
+   </View>
+
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="userLogin"
@@ -163,7 +198,7 @@ export default class User extends Component<Props> {
     </View>
  
     <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
-      <Text style={styles.signUpText}>Sign up</Text>
+      <Text style={styles.signUpText}>Add</Text>
     </TouchableOpacity>
  
    </View>

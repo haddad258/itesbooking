@@ -9,6 +9,9 @@ import Addimages from '../../addimages/importimage'
 var urlcnst = require('../../const/api')() +'sib-api/common/floors'
 var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
 var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
+var urltypefloors =require('../../const/api')()+'/sib-api/common/floors/types'
+var typefloorsnames=[]
+  var typefloorsid=[]
 
 var selectbuildingid =[]
 var selectbuildingname = []
@@ -23,7 +26,7 @@ constructor(props) {
     var {height, width} = Dimensions.get('window');
     this.state = {screenHeight: height, screenWidth: width,
                  idBuilding: '',
-                 idType:'',
+                 idFloorType:0,
                  idZone : '',
                  description:'',
                  gpsLocation: '',
@@ -67,7 +70,7 @@ onClickListener = (viewId) => {
   
   
   
-  let body= {"idBuilding": this.state.idBuilding, "idType":this.state.idType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
+  let body= {"idBuilding": this.state.idBuilding, "idFloorType":this.state.idFloorType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
   axios.post(urlcnst,body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data.name);
@@ -110,6 +113,15 @@ render() {
       selectbuildingname.push(response.data[i].name);
     }
   })
+  axios.get(urltypefloors)
+  .then(function (response) { 
+    typefloorsid.length=0;
+    typefloorsnames.length=0;   
+    for(var i=0;i<response.data.length; i++){     
+      typefloorsid.push(response.data[i].id);
+      typefloorsnames.push(response.data[i].name);
+    }
+  })
 
   return (
     
@@ -146,14 +158,23 @@ render() {
      underlineColorAndroid='transparent'
      onChangeText={(description) => this.setState({description})}/>
    </View>
+  
    <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idType"
-     keyboardType="description"
-     underlineColorAndroid='transparent'
-     onChangeText={(idType) => this.setState({idType})}/>
-   </View>
-   
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select type floors'}     
+          onSelect={(Value) => {this.state.idFloorType =typefloorsid[Value]  ;
+          
+          
+          
+          
+          }}
+          items={typefloorsnames}
+
+          
+        
+        ></Dropdown>
+      </View>
  
       
     <View style={styles.inputContainer}>
@@ -193,7 +214,7 @@ render() {
 
    
    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
-     <Text style={styles.signUpText}>Sign up</Text>
+     <Text style={styles.signUpText}>Add</Text>
    </TouchableOpacity>
 
   </View>

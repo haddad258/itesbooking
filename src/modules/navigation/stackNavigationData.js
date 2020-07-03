@@ -11,6 +11,7 @@ import Buildings from '../buildings/addbuildings'
 import Showuser from '../User/showuser'
 import Listuser from '../User/listuser'
 import Listbuilding from '../buildings/listbuilding'
+import Typebuilding from '../buildings/Typebuilding'
 
 
 // import ProfileScreen from '../profile/ProfileViewContainer';
@@ -24,6 +25,9 @@ import { colors, fonts } from '../../styles';
 import Zone from '../zone/Zone';
 import Listzone from '../zone/listzone';
 import Listfloors from '../floors/listfloors';
+import Typezone from '../zone/Typezone';
+import Typefloors from '../floors/typefloors'
+import Typerooms from '../rooms/Typerooms'
 
 const headerLeftComponent = (props) => {
   return (
@@ -227,6 +231,50 @@ const StackNavigationData = [
   { 
     name: 'list_floors',
     component: Listfloors,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'type_building',
+    component: Typebuilding,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'type_zone',
+    component: Typezone,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'typefloors',
+    component: Typefloors,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'Type_rooms',
+    component: Typerooms,
     headerLeft: headerLeftComponent,
     headerBackground: { source: headerBackground },
     headerTitleStyle: {

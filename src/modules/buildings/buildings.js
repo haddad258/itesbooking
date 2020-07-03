@@ -4,8 +4,13 @@ import {Platform, StyleSheet, Text, TextInput, View, Dimensions,TouchableOpacity
 Button,Alert,Image,ImageBackground,StatusBar ,ScrollView} from 'react-native';
 import axios from 'axios';
 import Addimages from '../../addimages/importimage'
+import {  RadioGroup, Dropdown } from '../../components';
+import Typebuilding from './Typebuilding';
+import { values } from 'lodash';
 var urlcnst = require('../../const/api')()+'sib-api/common/buildings'
-
+var urlbull = require('../../const/api')()+'/sib-api/common/buildings/types'
+var Typebuildingid=[];
+var Typebuildingname=[]
 export default class Buildings extends Component<Props> {
 
 constructor(props) {
@@ -25,6 +30,7 @@ constructor(props) {
                  type:'',                
                  status: '',
                  wholeResult: '',
+                 idBuildingType:0
                   };
 
    }
@@ -56,10 +62,10 @@ onClickListener = (viewId) => {
  }
 
  registerCall(){
-  var that = this;
+  
 
   
-  let body= {"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state}
+  let body= { idBuildingType:this.state.idBuildingType,"address": this.state.address, "city":this.state.city, "country": this.state.country,"gpsLocation": this.state.gpsLocation , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state}
   console.log(body)
   axios.post(urlcnst,body )
   .then(function (response) {
@@ -91,6 +97,17 @@ onClickListener = (viewId) => {
 }
 
 render() {
+
+
+  axios.get(urlbull)
+  .then(function (response) {     
+    Typebuildingid.length=0;
+    Typebuildingname.length=0;   
+    for(var i=0;i<response.data.length; i++){     
+      Typebuildingid.push(response.data[i].id);
+      Typebuildingname.push(response.data[i].name);
+    }
+  })
   return (
     
 
@@ -131,6 +148,13 @@ render() {
    </View>
    <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
+     placeholder="postalCode"
+     keyboardType="postalCode"
+     underlineColorAndroid='transparent'
+     onChangeText={(postalCode) => this.setState({postalCode})}/>
+   </View>
+   <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
      placeholder="description"
      keyboardType="country-address"
      underlineColorAndroid='transparent'
@@ -147,13 +171,20 @@ render() {
    <View style={styles.inputContainer}>
     <Addimages></Addimages>
     </View>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="type"
-     keyboardType="type"
-     underlineColorAndroid='transparent'
-     onChangeText={(type) => this.setState({type})}/>
-   </View>
+    <View style={styles.inputContainer}>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select Building Type'}     
+          onSelect={(Value) => {this.state.idBuildingType =Typebuildingid[Value]  ;
+        
+        
+          }}
+          items={Typebuildingname}
+
+          
+        
+        ></Dropdown>
+      </View>
    <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="name"
@@ -161,13 +192,7 @@ render() {
      underlineColorAndroid='transparent'
      onChangeText={(name) => this.setState({name})}/>
    </View>
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="postalCode"
-     keyboardType="postalCode"
-     underlineColorAndroid='transparent'
-     onChangeText={(postalCode) => this.setState({postalCode})}/>
-   </View>
+  
    <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="state"
@@ -178,7 +203,7 @@ render() {
   
 
    <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
-     <Text style={styles.signUpText}>Sign up</Text>
+     <Text style={styles.signUpText}>Add</Text>
    </TouchableOpacity>
 
   </View>

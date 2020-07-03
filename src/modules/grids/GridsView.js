@@ -13,6 +13,7 @@ import { colors, fonts } from '../../styles';
 
 import { RadioGroup, GridRow } from '../../components';
 import axios from 'axios'
+import { placeholder } from 'i18n-js';
 var urlgrid =require('../../const/api')()+'/sib-api/common/rooms'
 const listData = [
   {
@@ -131,14 +132,17 @@ state={
               <View
                 style={[
                   styles.badge,
-                  item.idBuilding === 1 && { backgroundColor: colors.green },
+                 
+                  (item.idRoomType === 5  || item.idRoomType === 7 || item.idRoomType === 8 ||item.idRoomType === 9 || item.idRoomType === 10 )&& { backgroundColor: colors.green },
+                  styleName="reserved"
                 ]}
+                
               >
                 <Text
                   style={{ fontSize: 10, color: colors.white }}
                   styleName="reserved"
                 >
-                  {item.staet} 
+                rooms booking
                 </Text>
               </View>
             )}

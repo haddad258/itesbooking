@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import React from 'react';
+import React,{Component} from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,7 +9,11 @@ import { store, persistor } from './src/redux/store';
 
 import AppView from './src/modules/AppViewContainer';
 
-export default function App() {
+//export default function Dashboard() {
+
+  export default class App extends Component {
+render(){
+console.log("hello")
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -27,6 +31,8 @@ export default function App() {
       </NavigationContainer>
     </Provider>
   );
+
+}
 }
 
 const styles = StyleSheet.create({

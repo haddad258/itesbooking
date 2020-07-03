@@ -10,12 +10,19 @@ var urlconst = require('../../const/api')() +'/sib-api/common/rooms'
 var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
 var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
 var urlbfloors =require('../../const/api')()+'/sib-api/common/floors/by-zone/'
+var urlroomtype = require('../../const/api')()+'/sib-api/common/rooms/types' 
+var typeroomid=[]
+var typeroomname=[]
 var selectbuildingid =[]
 var selectbuildingname = []
 var selectzoneid =[]
 var selectzonename =[]
 var selectfloorsid=[]
 var selectfloors=[]
+
+//haddad
+
+
 export default class Rooms extends Component<Props> {
 
 constructor(props) {
@@ -28,7 +35,7 @@ constructor(props) {
                  idFloor:'',
                  idZone : '',
                  description:'',
-                 idType: '',
+                 idRoomType: 0,
                  name:'',
                  state:'',
                  postalCode:'',
@@ -42,14 +49,14 @@ constructor(props) {
 
 onClickListener = (viewId) => {
         // Alert.alert(this.state.idBuilding+" "+this.state.idZone+" "+this.state.idType , "View_id "+viewId);
-        if(this.state.idBuilding || this.state.idBuilding != " "){
+     /*    if(this.state.idBuilding || this.state.idBuilding != " "){
           if(this.state.idFloor){            
          if(this.state.idZone){
           if(this.state.idType){
-            if(this.state.description){
+            if(this.state.description){ */
               this.registerCall();
 
-           }else{
+         /*   }else{
           Alert.alert("Please enter idZone");
          }
          }else{
@@ -63,14 +70,12 @@ onClickListener = (viewId) => {
    }
   }else{
     Alert.alert("Please enter description");
-  }   
+  }    */
   
  }
 
  registerCall(){
-  var that = this;
-  var url = that.state.baseUrl;
-   console.log("url:"+url);
+
   //let body= {"idBuilding": this.state.idBuilding, "idFloor":this.state.idFloor, "idZone": this.state.idZone,"idType": this.state.idType , "description":this.state.description,"name":this.state.name ,"postalCode":this.state.postalCode,"state":this.state.state,"type":this.state.type}
   let body = {
    
@@ -81,6 +86,7 @@ onClickListener = (viewId) => {
     "idFloor": this.state.idFloor,
     "idType": this.state.idType,
     "idZone": this.state.idType,
+    "idRoomType":this.state.idRoomType,
    
   
     "name": this.state.name
@@ -88,7 +94,7 @@ onClickListener = (viewId) => {
   console.log(body)
   axios.post(urlconst,body )
   .then(function (response) {
-    alert("the room was successfully created with userLogin  "  );
+    Alert.alert("the room was successfully created "  );
     console.log(response.data)
   })
   .catch(function (error) {
@@ -126,6 +132,16 @@ render() {
     }
   })
 
+  axios.get(urlroomtype)
+  .then(function (response) {     
+    typeroomid.length=0;
+    typeroomname.length=0;   
+    for(var i=0;i<response.data.length; i++){     
+      typeroomid.push(response.data[i].id);
+      typeroomname.push(response.data[i].name);
+    }
+  })
+
   return (
     
 
@@ -140,7 +156,7 @@ render() {
 
    <View style={styles.container}>
 
-   <Text style={styles.input}>Add Rooms</Text>
+   <Text style={styles.input}>Add Room</Text>
   
   
  
@@ -161,13 +177,7 @@ render() {
  
   
   
-   <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idType"
-     keyboardType="idZone-idBuilding"
-     underlineColorAndroid='transparent'
-     onChangeText={(idType) => this.setState({idType})}/>
-   </View>
+  
 
 
 
@@ -183,7 +193,20 @@ render() {
      underlineColorAndroid='transparent'
      onChangeText={(description) => this.setState({description})}/>
    </View>
+   <View style={styles.inputContainer}>
+   <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select typeroom'}     
+          onSelect={(Value) => {this.state.idRoomType =typeroomid[Value]  ;
+         
+          
+          }}
+          items={typeroomname}
 
+          
+        
+        ></Dropdown>
+   </View>
    <View style={styles.inputContainer}>
     <Dropdown
           style={{ width: 350, alignSelf: 'center' }}

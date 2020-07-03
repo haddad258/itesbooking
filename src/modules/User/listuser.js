@@ -111,15 +111,19 @@ console.log(data)
        
      })
 
-     axios.get(apiurl).then(response => response.data)
-     .then((data) => {
-      // this.setState({ tableHead: Object.keys(data[0]) })
-      data.forEach(element =>{
-        this.state.tableData.push(Object.values(element))
-       });  
-         
+   
+    axios.get(apiurl).then(response => response.data)
+    .then((data) => {
+     // this.setState({ tableHead: Object.keys(data[0]) })
+     data.forEach(element =>{
+       this.state.tableData.push(Object.values(element))
+      });  
         
-      }) 
+       
+     }) 
+
+     
+    
     }
   render() {
     const state = this.state;

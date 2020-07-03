@@ -8,14 +8,21 @@ const calendarIcon = require('../../assets/images/pages/calendar.png');
 const chatIcon = require('../../assets/images/pages/chat.png');
 const galleryIcon = require('../../assets/images/pages/gallery.png');
 const profileIcon = require('../../assets/images/pages/profile.png');
- const settings = require('../../assets/images/drawer/sett.png')
+const settings = require('../../assets/images/drawer/sett.png')
+const userpro =  require('../../assets/images/drawer/users.png')
+const floorssett =  require('../../assets/images/drawer/floors.png')
+const buildingsett = require('../../assets/images/drawer/building.png')
+const zonesett = require('../../assets/images/drawer/zonesett.png')
+var roomsseting = require('../../assets/images/drawer/roomsseting.png')
+const listuser = require('../../assets/images/drawer/listuser.png')
+const listbuilding =require('../../assets/images/drawer/listbuilding.png')
 
 export default function PagesScreen(props) {
   return (
     <ScrollView>
     <View style={styles.container}>
       <View style={styles.row}>
-        <TouchableOpacity
+      {/*   <TouchableOpacity
           onPress={() => props.navigation.navigate('Charts')}
           style={styles.item}
         >
@@ -25,7 +32,7 @@ export default function PagesScreen(props) {
             style={styles.itemImage}
           />
           <Text style={styles.itemText}>Show history</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Gallery')}
           style={styles.item}
@@ -88,35 +95,10 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={settings}
+            source={userpro}
             style={styles.itemImage}
           />
-          <Text style={styles.itemTextt}>User</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Floors')}
-          style={styles.item}
-        >
-          <Image
-            resizeMode="contain"
-            source={settings}
-            style={styles.itemImage}
-          />
-          <Text style={styles.itemTextt}>Floors</Text>
-        </TouchableOpacity>
-        
-      </View>
-      <View style={styles.row}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Rooms')}
-          style={styles.item}
-        >
-          <Image
-            resizeMode="contain"
-            source={settings}
-            style={styles.itemImage}
-          />
-          <Text style={styles.itemTextt}>Rooms</Text>
+          <Text style={styles.itemTextt}>Add User</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => props.navigation.navigate('Buildings')}
@@ -124,24 +106,54 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={settings}
+            source={buildingsett}
             style={styles.itemImage}
           />
-          <Text style={styles.itemTextt}>Buildings</Text>
+          <Text style={styles.itemTextt}>Add Buildings</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+       
+        
+      </View>
+      <View style={styles.row}>
+      <TouchableOpacity
           onPress={() => props.navigation.navigate('Zone')}
           style={styles.item}
         >
           <Image
             resizeMode="contain"
-            source={settings}
+            source={zonesett}
             style={styles.itemImage}
           />
-          <Text style={styles.itemTextt}>Zone</Text>
+          <Text style={styles.itemTextt}>Add Zone</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Floors')}
+          style={styles.item}
+        >
+          <Image
+            resizeMode="contain"
+            source={floorssett}
+            style={styles.itemImage}
+          />
+          <Text style={styles.itemTextt}>Add Floors</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Rooms')}
+          style={styles.item}
+        >
+          <Image
+            resizeMode="contain"
+            source={roomsseting}
+            style={styles.itemImage}
+          />
+          <Text style={styles.itemTextt}> Add Rooms</Text>
+        </TouchableOpacity>
+       
+      
       </View>
       <View style={styles.row}>
+
+
 
       <TouchableOpacity
           onPress={() => props.navigation.navigate('list_user')}
@@ -149,7 +161,7 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={settings}
+            source={listuser}
             style={styles.itemImage}
           />
           <Text style={styles.itemTextt}>show list user</Text>
@@ -160,7 +172,7 @@ export default function PagesScreen(props) {
         >
           <Image
             resizeMode="contain"
-            source={settings}
+            source={listbuilding}
             style={styles.itemImage}
           />
           <Text style={styles.itemTextt}>show list Building</Text>
@@ -177,7 +189,7 @@ export default function PagesScreen(props) {
   >
     <Image
       resizeMode="contain"
-      source={settings}
+      source={floorssett}
       style={styles.itemImage}
     />
     <Text style={styles.itemTextt}>show list Floors</Text>
@@ -188,7 +200,7 @@ export default function PagesScreen(props) {
   >
     <Image
       resizeMode="contain"
-      source={settings}
+      source={zonesett}
       style={styles.itemImage}
     />
     <Text style={styles.itemTextt}>show list Zone</Text>

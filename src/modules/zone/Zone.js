@@ -7,7 +7,9 @@ import Addimages from '../../addimages/importimage'
 import {  RadioGroup, Dropdown } from '../../components';
 var urlcnst = require('../../const/api')()+'sib-api/common/zones'
 var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
-
+var urltypezone =require('../../const/api')()+'sib-api/common/zones/types'
+var Typebuildingid=[];
+var Typebuildingname=[]
 var selectbuildingid =[]
 var selectbuildingname = []
 export default class Zone extends Component<Props> {
@@ -19,7 +21,7 @@ export default class Zone extends Component<Props> {
      var {height, width} = Dimensions.get('window');
      this.state = {screenHeight: height, screenWidth: width,
                   description: '',
-                  idType:'',
+                  idZoneType:0,
                   name : '',
                   idBuilding:'',
                   status: '',
@@ -30,35 +32,19 @@ export default class Zone extends Component<Props> {
  
  onClickListener = (viewId) => {
          // Alert.alert(this.state.description+" "+this.state.name+" "+this.state.password , "View_id "+viewId);
-         if(this.state.description || this.state.description != " "){
-           if(this.state.idType){            
-          if(this.state.name){
-          
-             if(this.state.idBuilding){
+       
                this.registerCall();
-            }else{
-            Alert.alert("Please enter name");
-          
-          }
-       }else{
-     Alert.alert("Please enter idbulding");
-       }
-    }else{
-     Alert.alert("Please enter idType");
-    }
-   }else{
-     Alert.alert("Please enter user");
-   }   
+        
    
   }
  
   registerCall(){
   
-   let body= {"description": this.state.description, "idType":this.state.idType, "name": this.state.name , "idBuilding":this.state.idBuilding}
-  
+   let body= {"description": this.state.description, "idZoneType":this.state.idZoneType, "name": this.state.name , "idBuilding":this.state.idBuilding}
+  console.log(body)
     axios.post(urlcnst,body )
    .then(function (response) {
-     alert("the ZONE was successfully created with id " + response.data);
+     alert("the ZONE was successfully created with id " + response.data.id +"and name "+response.data.name);
      console.log("this.reponse")
    })
    .catch(function (error) {
@@ -102,6 +88,16 @@ export default class Zone extends Component<Props> {
 
     }
   })
+
+  axios.get(urltypezone)
+  .then(function (response) {     
+    Typebuildingid.length=0;
+    Typebuildingname.length=0;   
+    for(var i=0;i<response.data.length; i++){     
+      Typebuildingid.push(response.data[i].id);
+      Typebuildingname.push(response.data[i].name);
+    }
+  })
    return (
      
  
@@ -136,12 +132,19 @@ export default class Zone extends Component<Props> {
      onChangeText={(description) => this.setState({description})}/>
     </View>
     <View style={styles.inputContainer}>
-    <TextInput style={styles.inputs}
-     placeholder="idType"
-     keyboardname="name-address"
-     underlineColorAndroid='transparent'
-     onChangeText={(idType) => this.setState({idType})}/>
-    </View>
+    <Dropdown
+          style={{ width: 350, alignSelf: 'center' }}
+          placeholder={'select Zone Type'}     
+          onSelect={(Value) => {this.state.idZoneType =Typebuildingid[Value]  ;
+        
+        
+          }}
+          items={Typebuildingname}
+
+          
+        
+        ></Dropdown>
+      </View>
  
    
     
@@ -156,7 +159,7 @@ export default class Zone extends Component<Props> {
       </View>
  
     <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>
-      <Text style={styles.signUpText}>Sign up</Text>
+      <Text style={styles.signUpText}>Add</Text>
     </TouchableOpacity>
  
    </View>

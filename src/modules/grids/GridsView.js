@@ -14,7 +14,8 @@ import { colors, fonts } from '../../styles';
 import { RadioGroup, GridRow } from '../../components';
 import axios from 'axios'
 import { placeholder } from 'i18n-js';
-var urlgrid =require('../../const/api')()+'/sib-api/common/rooms'
+var urlgrid =require('../../const/bookapi')()+'sib-api/booking/bookings/with-details/all-rooms'
+
 const listData = [
   {
     id: 1,
@@ -42,44 +43,51 @@ state={
       this.props.tabIndex
     ];
 
-    _openArticle = article => {
+/*   _openArticle = article => {
       this.props.navigation.navigate('Article', {
         article,
       });
+    };  */
+
+
+    _openArticle = roomid => {
+      this.props.navigation.navigate('roomsdetails',{
+        roomid
+      })
     };
   
 
   renderRowOne = rowData => {
     const cellViews = rowData.item.map(item => (
-      <TouchableOpacity key={item.id} onPress={() => this._openArticle(item.id)}>
+      <TouchableOpacity key={item.id} onPress={() => this._openArticle(item)}>
         <View style={styles.itemOneContainer}>
           <View style={styles.itemOneImageContainer}>
             <Image style={styles.itemOneImage} source={{ uri: imagestatic }} />
           </View>
           <View style={styles.itemOneContent}>
             <Text style={styles.itemOneTitle} numberOfLines={1}>
-              {item.name}
+              {item.room.room.name}
             </Text>
             <Text
               style={styles.itemOneSubTitle}
               styleName="collapsible"
               numberOfLines={3}
             >
-              floors: {item.idFloor}
+              floors: {item.room.floor.name}
             </Text>
             <Text
               style={styles.itemOneSubTitle}
               styleName="collapsible"
               numberOfLines={4}
             >
-              Building: {item.idBuilding}
+              Building: {item.room.building.name}
             </Text>
             <Text
               style={styles.itemOneSubTitle}
               styleName="collapsible"
               numberOfLines={4}
             >
-              state: {item.state}
+              type salle: "{item.room.roomType.name}-{item.room.roomType.description}"
             </Text>
             <Text style={styles.itemOnePrice} numberOfLines={1}>
               {item.price}
@@ -104,9 +112,10 @@ state={
       <View style={styles.itemTwoContent}>
         <Image style={styles.itemTwoImage} source={{ uri: imagestatic }} />
         <View style={styles.itemTwoOverlay} />
-        <Text style={styles.itemTwoTitle}>{item.name}</Text>
-        <Text style={styles.itemTwoSubTitle}>{item.idBuilding}</Text>
-        <Text style={styles.itemTwoPrice}>{item.idFloor}</Text>
+         <Text style={styles.itemTwoTitle}>{item.room.room.name}</Text>
+         <Text style={styles.itemTwoSubTitle}>{item.room.room.description}</Text>
+        <Text style={styles.itemTwoPrice}>{item.room.floor.name}  {item.room.building.name}</Text>  
+        
       </View>
     </TouchableOpacity>
   );
@@ -120,33 +129,35 @@ state={
       <View style={styles.itemThreeSubContainer}>
         <Image source={{ uri: imagestatic }} style={styles.itemThreeImage} />
         <View style={styles.itemThreeContent}>
-          <Text style={styles.itemThreeBrand}>{item.name}</Text>
+          <Text style={styles.itemThreeBrand}>{ item.room.room.name }</Text>
           <View>
-            <Text style={styles.itemThreeTitle}>{item.idBuilding}</Text>
+            <Text style={styles.itemThreeTitle}>{ item.room.floor.name }</Text>
             <Text style={styles.itemThreeSubtitle} numberOfLines={1}>
-              {item.idFloor}
+              {item.room.roomType.description}
             </Text>
           </View>
           <View style={styles.itemThreeMetaContainer}>
-            {item.idBuilding && (
+            {item.room.room && (
               <View
                 style={[
                   styles.badge,
                  
-                  (item.idRoomType === 5  || item.idRoomType === 7 || item.idRoomType === 8 ||item.idRoomType === 9 || item.idRoomType === 10 )&& { backgroundColor: colors.green },
-                  styleName="reserved"
-                ]}
+                  (!item.bookings   )&& { backgroundColor: colors.green },
+                  styleName="libre",
                 
-              >
+                ]} 
+                  >  
+                  
                 <Text
                   style={{ fontSize: 10, color: colors.white }}
                   styleName="reserved"
+                  
                 >
-                rooms booking
+              reserved
                 </Text>
               </View>
             )}
-            <Text style={styles.itemThreePrice}>{item.price}</Text>
+            <Text style={styles.itemThreePrice}> local {item.room.building.name} {item.room.zone.name}</Text>
           </View>
         </View>
       </View>
@@ -161,6 +172,7 @@ state={
       
    //   tableData.push(Object.values(data[0]))
    this.setState({listofroom: data})
+  // console.log(data)
 
    
 
@@ -170,7 +182,7 @@ state={
     }
 
   render() {
-    console.log(this.state.listofroom)
+  //  console.log(this.state.listofroom)
     const groupedData =
       this.props.tabIndex === 0
         ? GridRow.groupByRows(this.state.listofroom, 2)

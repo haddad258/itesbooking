@@ -40,7 +40,9 @@ export default class Zone extends Component<Props> {
  
   registerCall(){
   
-   let body= {"description": this.state.description, "idZoneType":this.state.idZoneType, "name": this.state.name , "idBuilding":this.state.idBuilding}
+   let body= {"description": this.state.description, "idZoneType":this.state.idZoneType, "name": this.state.name , "idBuilding":this.state.idBuilding , "images": [
+    "string"
+  ]}
   console.log(body)
     axios.post(urlcnst,body )
    .then(function (response) {

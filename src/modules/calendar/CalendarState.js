@@ -1,6 +1,7 @@
 const ITEMS_LOADED = 'CalendarState/ITEMS_LOADED';
 
 function itemsLoaded(items) {
+  console.log(items)
   return {
     type: ITEMS_LOADED,
     items,
@@ -40,7 +41,7 @@ export function loadItems(day) {
       newItems[key] = items[key];
     });
 
-    console.log(newItems);
+   // console.log(newItems);
 
     dispatch(itemsLoaded(newItems));
   };
@@ -52,7 +53,7 @@ const defaultState = {
 };
 
 export default function CalendarStateReducer(state = defaultState, action) {
-  switch (action.type) {
+  switch (action.type) { 
     case ITEMS_LOADED:
       return Object.assign({}, state, {
         isLoading: true,

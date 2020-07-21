@@ -13,7 +13,7 @@ import AppView from './src/modules/AppViewContainer';
 
   export default class App extends Component {
 render(){
-console.log("hello")
+
   return (
     <Provider store={store}>
       <NavigationContainer>

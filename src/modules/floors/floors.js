@@ -70,7 +70,7 @@ onClickListener = (viewId) => {
   
   
   
-  let body= {"idBuilding": this.state.idBuilding, "idFloorType":this.state.idFloorType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
+  let body= { "images": [ "string"],"idBuilding": this.state.idBuilding, "idFloorType":this.state.idFloorType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
   axios.post(urlcnst,body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data.name);

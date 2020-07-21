@@ -6,48 +6,61 @@ import {
   Image,
 } from 'react-native';
 import axios from 'axios';
-const API_URL = 'http://197.27.92.203:9970/sib-api/common/users/';
+var urlconst = require('../../const/api')()+'sib-api/common/users/login'
 
 export default class Showuser extends Component {
 
 
      state = {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password:'',
-        phone: '',
+        user:{}
           };
  
      componentDidMount(){
 
-        const url = `${API_URL}`;
-        axios.get(url).then(response => response.data)
+        
+        axios.post(urlconst, this.props.route.params.userinfo).then(response => response.data)
         .then((data) => {
-            this.setState({ id: data[0].id })
-            this.setState({ firstName: data[0].firstName })
-            this.setState({ lastName: data[0].lastName })
-            this.setState({ email: data[0].email })
-            this.setState({ phone: data[0].phone })
-            this.setState({ password: data[0].password })
+            this.setState({user : data})
           console.log(data)
          })
     } 
 
   render() {
+    console.log(this.state.user)
+   if(this.props.route.params.userinfo.password ==="" || this.props.route.params.userinfo.loginuser ==="" || !this.state.user.id){
+
+    
+return (
+
+  <View style={styles.container}> 
+  <View style={styles.header}>
+            <View style={styles.headerContent}>
+  <Text style={styles.name}
+  
+  onPress={()=> this.props.navigation.navigate('ProfileBooking')}
+  >
+                user not find please try again _click here_
+                </Text>
+                </View>
+                </View>
+  </View>
+)
+
+   } else{
+  
     return (
       <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.headerContent}>
                 <Image style={styles.avatar}
                   source={{uri: 'https://bootdey.com/img/Content/avatar/avatar1.png'}}/>
-
+                  
                 <Text style={styles.name}>
-                  Mr/Mme {this.state.firstName} {this.state.lastName}
+                  Mr/Mme {this.state.user.firstName} {this.state.user.lastName}
                 </Text>
+                
                 <Text style={styles.name}>
-                  id: {this.state.id} 
+                  userLogin: {this.state.user.userLogin} 
                 </Text>
             </View>
           </View>
@@ -55,11 +68,14 @@ export default class Showuser extends Component {
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.textInfo}>
-               email: {this.state.email}
+               email: {this.state.user.email}
               </Text>
           
               <Text style={styles.textInfo}>
-               Phone: {this.state.phone}
+               Phone: {this.state.user.phone}
+              </Text>
+              <Text style={styles.textInfo}>
+               Group: {this.state.user.idGroup}
               </Text>
             
               <Text style={styles.textInfo}>
@@ -70,6 +86,7 @@ export default class Showuser extends Component {
       </View>
     );
   }
+}
 }
 
 const styles = StyleSheet.create({

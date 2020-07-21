@@ -28,6 +28,11 @@ import Listfloors from '../floors/listfloors';
 import Typezone from '../zone/Typezone';
 import Typefloors from '../floors/typefloors'
 import Typerooms from '../rooms/Typerooms'
+import Roomdetails from '../rooms/Roomdetails'
+import Bookingsadd from '../Booking/Booking';
+import Loginuser from '../User/loginuser'
+import Homerooms from '../home/Homerooms'
+import Typeuser from '../User/Typeuser';
 
 const headerLeftComponent = (props) => {
   return (
@@ -87,6 +92,17 @@ const StackNavigationData = [
   {
     name: 'Profile',
     component: Showuser,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  {
+    name: 'ProfileBooking',
+    component: Loginuser,
     headerLeft: headerLeftComponent,
     headerBackground: { source: headerBackground },
     headerTitleStyle: {
@@ -275,6 +291,50 @@ const StackNavigationData = [
   { 
     name: 'Type_rooms',
     component: Typerooms,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'Type_user',
+    component: Typeuser,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'roomsdetails',
+    component: Roomdetails,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'Bookingsadd',
+    component: Bookingsadd,
+    headerLeft: headerLeftComponent,
+    headerBackground: { source: headerBackground },
+    headerTitleStyle: {
+      fontFamily: fonts.primaryRegular,
+      color: colors.white,
+      fontSize: 18,
+    },
+  },
+  { 
+    name: 'homeroom',
+    component: Homerooms,
     headerLeft: headerLeftComponent,
     headerBackground: { source: headerBackground },
     headerTitleStyle: {

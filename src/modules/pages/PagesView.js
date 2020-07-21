@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image ,ScrollView} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image ,ScrollView, Settings} from 'react-native';
 
 import { colors, fonts } from '../../styles';
 
@@ -45,7 +45,7 @@ export default function PagesScreen(props) {
           <Text style={styles.itemText}>Gallery</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('Profile')}
+          onPress={() => props.navigation.navigate('ProfileBooking')}
           style={styles.item}
         >
           <Image
@@ -79,13 +79,13 @@ export default function PagesScreen(props) {
           />
           <Text style={styles.itemText}>Calendar</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={styles.item}>
+        <TouchableOpacity onPress={() => {props.navigation.navigate('homeroom')}} style={styles.item}>
           <Image
             resizeMode="contain"
-            source={profileIcon}
+            source={settings}
             style={styles.itemImage}
           />
-          <Text style={styles.itemText}>Login</Text>
+          <Text style={styles.itemText}>change default Home page </Text>
         </TouchableOpacity>
         </View>
         <View style={styles.row}>

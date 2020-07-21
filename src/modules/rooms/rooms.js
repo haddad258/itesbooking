@@ -84,9 +84,12 @@ onClickListener = (viewId) => {
     
     "idBuilding": this.state.idBuilding,
     "idFloor": this.state.idFloor,
-    "idType": this.state.idType,
-    "idZone": this.state.idType,
+    
+    "idZone": this.state.idZone,
     "idRoomType":this.state.idRoomType,
+    "images": [
+      "string"
+    ],
    
   
     "name": this.state.name

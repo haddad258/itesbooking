@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-table-component';
 import axios from 'axios'
@@ -9,14 +9,22 @@ export default class Listfloors extends Component {
     super(props);
     this.state = {
       tableHead: [],
-      widthArr: [40, 60, 80, 100, 120, 140, 160, 180, 200],
+      widthArr: [40, 80, 80, 150, 50, 140, 60, 60, 60],
       tableData:[]
       
     }
   }
   componentDidMount(){
 
+    setTimeout(() => {
+      
  
+      this.setState({
+        tableHead: [],
+        widthArr: [40, 60, 80, 150, 120, 140, 160, 180, 200],
+        tableData:[]
+        
+      })
     axios.get(urlbzone).then(response => response.data)
     .then((data) => {
       this.setState({ tableHead: Object.keys(data[0]) })
@@ -34,22 +42,13 @@ export default class Listfloors extends Component {
         this.state.tableData.push(Object.values(element))
        });  
          
-        
+      }, 2000);
       }) 
     }
   render() {
     const state = this.state;
    
-  /*   const tableData = [];
-     for (let i = 0; i < 30; i += 1) {
-      const rowData = [];
-      for (let j = 0; j < 9; j += 1) {
-        rowData.push(`${i}${j}`);
-      }
-      tableData.push(rowData);
-      console.log(tableData)
-    } 
- */
+ 
 const element = (data, index) => (
   <TouchableOpacity onPress={() => this._alertIndex(index)}>
     <View style={styles.btn}>
@@ -94,4 +93,140 @@ const styles = StyleSheet.create({
   text: { textAlign: 'center', fontWeight: '100' },
   dataWrapper: { marginTop: -1 },
   row: { height: 40 }
-});
+}); */
+
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList
+} from 'react-native';
+import axios from 'axios'
+var urlcnst = require('../../const/api')()+'sib-api/common/floors/with-details'
+
+export default class Listfloors extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+ 
+      tableData:[]
+    }
+  }
+
+  componentDidMount(){
+
+    axios.get(urlcnst).then(response => response.data)
+    .then((data) => {
+      console.log(data)
+      data.forEach(element =>{
+        this.state.tableData.push(element)
+       })
+    }) 
+    
+  }
+
+  render() {
+    return (
+      <FlatList
+        style={styles.root}
+        data={this.state.tableData}
+        extraData={this.state}
+        ItemSeparatorComponent={() => {
+          return (
+            <View style={styles.separator}/>
+          )
+        }}
+        keyExtractor={(item)=>{
+          return item.id;
+        }}
+        renderItem={(item) => {
+          const Notification = item.item;
+         
+          let attachment = <View/>;
+
+          let mainContentStyle;
+          if(Notification.attachment) {
+            mainContentStyle = styles.mainContent;
+            attachment = <Image style={styles.attachment} source={{uri:"https://img.icons8.com/color/70/000000/name.png"}}/>
+          }
+          return(
+            <View style={styles.container}>
+              <Image source={{uri:"https://i.ibb.co/jrWBdxx/floors.png"}} style={styles.avatar}/>
+              <View style={styles.content}>
+                <View style={mainContentStyle}>
+                  <View style={styles.text}>
+                    <Text style={styles.name}>{Notification.floor.name}</Text>
+                    
+                  </View>
+                  <Text >zone: {Notification.zone.name} - Building: {Notification.building.name}  </Text>
+          <Text> type: {Notification.type.name}</Text>
+                  <Text style={styles.timeAgo}>
+                  {Notification.floor.description}
+                  </Text>
+                </View>
+                {attachment}
+              </View>
+            </View>
+          );
+        }}/>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: "#FFFFFF"
+  },
+  container: {
+    padding: 16,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: "#FFFFFF",
+    alignItems: 'flex-start'
+  },
+  avatar: {
+    width:50,
+    height:50,
+    borderRadius:25,
+  },
+  text: {
+    marginBottom: 5,
+    flexDirection: 'row',
+    flexWrap:'wrap'
+  },
+  content: {
+    flex: 1,
+    marginLeft: 16,
+    marginRight: 0
+  },
+  mainContent: {
+    marginRight: 60
+  },
+  img: {
+    height: 50,
+    width: 50,
+    margin: 0
+  },
+  attachment: {
+    position: 'absolute',
+    right: 0,
+    height: 50,
+    width: 50
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#CCCCCC"
+  },
+  timeAgo:{
+    fontSize:12,
+    color:"#696969"
+  },
+  name:{
+    fontSize:16,
+    color:"#1E90FF"
+  }
+});  

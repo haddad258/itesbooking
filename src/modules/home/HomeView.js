@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,8 +9,9 @@ import {
 
 import { fonts, colors } from '../../styles';
 import { Text } from '../../components/StyledText';
-
-export default function HomeScreen({ isExtended, setIsExtended }) {
+import { Button } from 'react-native-ui-lib';
+var dateex ;
+export default function HomeScreen({ isExtended, setIsExtended,route }) {
   // const rnsUrl = 'https://reactnativestarter.com';
   // const handleClick = () => {
   //   Linking.canOpenURL(rnsUrl).then(supported => {
@@ -22,6 +23,57 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   //   });
   // };
 
+console.log(route.params)
+
+if(!route.params){
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../../assets/images/background.png')}
+        style={styles.bgImage}
+        resizeMode="cover"
+      >
+        <View style={styles.section}>
+         
+          <Image source={{uri: 'https://i.ibb.co/vV7yp07/salle.jpg'}}
+       style={{width: 400, height: 200}} />
+         
+        
+          
+        </View>
+        
+        <View style={styles.section}>
+          <Text color="#19e7f7" size={15}>
+          <Text size={30} bold white style={styles.title}>
+            paramtres -- change default Home page 
+            {  new Date().getMinutes()}
+          </Text>
+              </Text>
+
+          <Text size={30} bold white style={styles.title}>
+         
+          </Text>
+        </View>
+        
+     
+            <TouchableOpacity
+              style={styles.priceLink}
+              onPress={() =>
+                isExtended ? setIsExtended(false) : setIsExtended(true)
+              }
+            >
+             
+              
+            </TouchableOpacity>
+         
+       
+        
+      </ImageBackground>
+    </View>
+  );
+
+
+}else{
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -44,9 +96,16 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
               </Text>
 
           <Text size={30} bold white style={styles.title}>
-            Room 2 
+           {route.params.room.room.room.name }
+          </Text>
+
+          <Text size={30} bold white style={styles.title}>
+           {new Date(route.params.room.bookings.startDateTime).toJSON().replace('T',' ').substring(0,19) }
+
+         
           </Text>
         </View>
+        
         <View style={[styles.section, styles.sectionLarge]}>
           <Text color="#19e7f7" hCenter size={15} style={styles.description}>
             {' '}
@@ -66,8 +125,8 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
             >
               <Text white size={14}>
                 {isExtended
-                  ? 'unitil 13'
-                  : 'until 13:00'}
+                  ? new Date(route.params.room.bookings.startDateTime).toJSON().replace('T',' ').substring(0,19)
+                  : new Date(route.params.room.bookings.endDateTime).toJSON().replace('T',' ').substring(0,19)}
               </Text>
               
             </TouchableOpacity>
@@ -79,10 +138,18 @@ export default function HomeScreen({ isExtended, setIsExtended }) {
   );
 }
 
+
+
+
+
+
+  
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+   
     justifyContent: 'space-around',
   },
   bgImage: {

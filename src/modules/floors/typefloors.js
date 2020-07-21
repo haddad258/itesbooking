@@ -46,6 +46,7 @@
       axios.post(urlcnst,body )
        .then(function (response) {
          alert("the type Zone was successfully created with id " + response.data);
+         
          console.log("this.reponse")
        })
        .catch(function (error) {

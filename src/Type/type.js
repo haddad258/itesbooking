@@ -72,6 +72,23 @@ export default function Typecompement(props) {
         </TouchableOpacity>
 
         </View>
+        <View style={styles.row}>
+       
+
+
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Type_user')}
+          style={styles.item}
+        >
+          <Image
+            resizeMode="contain"
+            source={typeofexample}
+            style={styles.itemImage}
+          />
+          <Text style={styles.itemTextt}>Add Type user</Text>
+        </TouchableOpacity>
+
+        </View>
     </View>
     </ScrollView>
   );

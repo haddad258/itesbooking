@@ -66,7 +66,9 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
     "idRoom": this.props.route.params.article,
     "startDateTime": this.state.dateS,
     "endDateTime": this.state.dateE,
-    "idUser": this.state.UserLogin
+    "userLogin": this.state.UserLogin,
+    "password":this.state.password
+
   }
  console.log(body)
   axios.post('http://192.168.1.187:9880/sib-api/booking/bookings/',body )

@@ -8,7 +8,7 @@ import {  RadioGroup, Dropdown } from '../../components';
 var urlcnst = require('../../const/api')()+'sib-api/common/zones'
 var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
 var urltypezone =require('../../const/api')()+'sib-api/common/zones/types'
-var Typebuildingid=[];
+var Typebuildingid=["TypeZ1","TypeZ2","TypeZ3","TypeZ4","TypeZ5"];
 var Typebuildingname=[]
 var selectbuildingid =[]
 var selectbuildingname = []
@@ -40,14 +40,14 @@ export default class Zone extends Component<Props> {
  
   registerCall(){
   
-   let body= {"description": this.state.description, "idZoneType":this.state.idZoneType, "name": this.state.name , "idBuilding":this.state.idBuilding , "images": [
+   let body= {"description": this.state.description, "type":this.state.idZoneType, "name": this.state.name , "idBuilding":this.state.idBuilding , "images": [
     "string"
   ]}
-  console.log(body)
+  //console.log(body)
     axios.post(urlcnst,body )
    .then(function (response) {
      alert("the ZONE was successfully created with id " + response.data.id +"and name "+response.data.name);
-     console.log("this.reponse")
+     //console.log("this.reponse")
    })
    .catch(function (error) {
      alert("result:"+error)
@@ -60,19 +60,19 @@ export default class Zone extends Component<Props> {
          
            return response.json();
          }).then(function (result) {  
-            // console.log(result);
+            // //console.log(result);
             if(!result.error){
              that.setState({ status: result.error,
                              wholeResult: result,
                           });
              Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-             console.log(that.state.wholeResult.user.uid);
+             //console.log(that.state.wholeResult.user.uid);
          }else{
           Alert.alert(result.error_msg);
-          console.log(result);
+          //console.log(result);
     }
  }).catch(function (error) {
-    console.log("-------- error ------- "+error);
+    //console.log("-------- error ------- "+error);
     alert("result:"+error)
   }); */
  }
@@ -91,7 +91,7 @@ export default class Zone extends Component<Props> {
     }
   })
 
-  axios.get(urltypezone)
+ /*  axios.get(urltypezone)
   .then(function (response) {     
     Typebuildingid.length=0;
     Typebuildingname.length=0;   
@@ -99,7 +99,7 @@ export default class Zone extends Component<Props> {
       Typebuildingid.push(response.data[i].id);
       Typebuildingname.push(response.data[i].name);
     }
-  })
+  }) */
    return (
      
  
@@ -141,7 +141,7 @@ export default class Zone extends Component<Props> {
         
         
           }}
-          items={Typebuildingname}
+          items={Typebuildingid}
 
           
         

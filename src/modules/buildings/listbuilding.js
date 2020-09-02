@@ -127,6 +127,7 @@ export default class Listbuilding extends Component {
     axios.get(urlcnst).then(response => response.data)
       .then((data) => {
         data.forEach(element => {
+       
           this.state.tableData.push(element)
         })
       })
@@ -134,6 +135,7 @@ export default class Listbuilding extends Component {
   }
 
   render() {
+    //console.log(this.state.tableData)
     return (
       <FlatList
         style={styles.root}

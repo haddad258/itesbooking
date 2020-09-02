@@ -114,7 +114,7 @@ export default class Listuser extends Component {
       this.setState({ tableHead: Object.keys(data[0]) })
    //   tableData.push(Object.values(data[0]))
    
-console.log(data)
+//console.log(data)
   
        
      })
@@ -143,7 +143,7 @@ console.log(data)
         rowData.push(`${i}${j}`);
       }
       tableData.push(rowData);
-      console.log(tableData)
+      //console.log(tableData)
     } 
  
 
@@ -236,7 +236,7 @@ export default class Users extends Component {
 
     axios.get(urlcnst).then(response => response.data)
     .then((data) => {
-      console.log(data)
+     // //console.log(data)
       data.forEach(element =>{
         this.state.tableData.push(element)
        })

@@ -2,8 +2,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Agenda } from 'react-native-calendars';
-
+import axios from 'axios'
 import { colors, fonts } from '../../styles';
+var urlcnst = require('../../const/bookapi')() + 'sib-api/booking/bookings/by-date/between-dates?startDate=2020-03-23T09:07:00.422Z&endDate=2020-12-29T08:16:14.132Z'
+
 
 class CalendarScreen extends React.Component {
   rowHasChanged(r1, r2) {
@@ -45,10 +47,10 @@ class CalendarScreen extends React.Component {
               marginBottom: 10,
             }}
           >
-            {item.name}
+           Topic Booking {item.name} :
           </Text>
-          <Text style={{ color: '#9B9B9B', fontFamily: fonts.primaryRegular }}>
-            {item.time}
+          <Text style={{ color: '#9B9B00', fontFamily: fonts.primaryRegular }}>
+          Room  {item.room}   reserved By  {item.user}
           </Text>
         </View>
 
@@ -58,14 +60,35 @@ class CalendarScreen extends React.Component {
   }
 
   render() {
-    const { items, loadItems } = this.props;
+   // const { items, loadItems } = this.props;
+   // //console.log("thisitems" ,items)
+
+   const items = {};
+
+  // axios.get("http://192.168.1.187:9880/sib-api/booking/bookings/by-date/between-dates?startDate=2020-03-23T09:07:00.422Z&endDate=2020-12-29T08:16:14.132Z")
+  axios.get(urlcnst)
+  .then((response) =>{
+  
+    
+     response.data.forEach(element => {
+    // //console.log(Object.keys(element)[0].topic)
+     // //console.log(new Date(Object.keys(element)[0]).toISOString().split('T')[0])
+   items[new Date(Object.keys(element)[0]).toISOString().split('T')[0]] = [{name: element[Object.keys(element)[0]].topic ,
+    user :  element[Object.keys(element)[0]].user.userLogin ,
+    time:"hello", room:  element[Object.keys(element)[0]].room.room.name   ,labels:[new Date(Object.keys(element)[0]).toISOString().split('T')[0]]}]
+   
+   });
+  })
+
     return (
       <Agenda
         items={items}
-        loadItemsForMonth={loadItems}
         renderItem={this.renderItem}
+      /*   loadItemsForMonth={loadItems}
+       
         renderEmptyDate={this.renderEmptyDate}
         rowHasChanged={this.rowHasChanged}
+        */
         theme={{
           dotColor: colors.primaryLight,
           selectedDayBackgroundColor: colors.primaryLight,

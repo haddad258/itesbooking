@@ -2,7 +2,7 @@ const stubImages = [
   {
     id: 0,
     link:
-      'https://i.ibb.co/vV7yp07/salle.jpg',
+      '',
     description: 'Test image in the grid',
   },
   {
@@ -26,7 +26,7 @@ const stubImages = [
   {
     id: 4,
     link:
-      'https://i.ibb.co/vV7yp07/salle.jpg',
+      '',
     description: 'Test image in the grid',
   },
   {

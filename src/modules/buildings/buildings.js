@@ -11,7 +11,7 @@ import Typebuilding from './Typebuilding';
 import { values } from 'lodash';
 var urlcnst = require('../../const/api')() + 'sib-api/common/buildings'
 var urlbull = require('../../const/api')() + '/sib-api/common/buildings/types'
-var Typebuildingid = [];
+var Typebuildingid = ["typeB1", "typeB2","typeB3","typeB4","typeB5"];
 var Typebuildingname = []
 export default class Buildings extends Component<Props> {
 
@@ -33,7 +33,7 @@ export default class Buildings extends Component<Props> {
       type: '',
       status: '',
       wholeResult: '',
-      idBuildingType: 0
+      idBuildingType: 'select building'
     };
 
   }
@@ -68,12 +68,12 @@ export default class Buildings extends Component<Props> {
 
 
 
-    let body = { "images": ["string"], "idBuildingType": this.state.idBuildingType, "address": this.state.address, "city": this.state.city, "country": this.state.country, "gpsLocation": this.state.gpsLocation, "description": this.state.description, "name": this.state.name, "postalCode": this.state.postalCode, "state": this.state.state }
-    console.log(body)
+    let body = { "images": ["string"], "type": this.state.idBuildingType, "address": this.state.address, "city": this.state.city, "country": this.state.country, "gpsLocation": this.state.gpsLocation, "description": this.state.description, "name": this.state.name, "postalCode": this.state.postalCode, "state": this.state.state }
+    //console.log(body)
     axios.post(urlcnst, body)
       .then(function (response) {
         Alert.alert("this buillding was add in gps location " + response.data.gpsLocation + "with name " + response.data.name);
-        console.log(response.data)
+        //console.log(response.data)
       })
       .catch(function (error) {
         alert("result:" + error)
@@ -82,19 +82,19 @@ export default class Buildings extends Component<Props> {
            
              return response.json();
            }).then(function (result) {  
-              // console.log(result);
+              // //console.log(result);
               if(!result.error){
                that.setState({ status: result.error,
                                wholeResult: result,
                             });
                Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-               console.log(that.state.wholeResult.user.uid);
+               //console.log(that.state.wholeResult.user.uid);
            }else{
             Alert.alert(result.error_msg);
-            console.log(result);
+            //console.log(result);
       }
    }).catch(function (error) {
-      console.log("-------- error ------- "+error);
+      //console.log("-------- error ------- "+error);
       alert("result:"+error)
     }); */
   }
@@ -102,15 +102,15 @@ export default class Buildings extends Component<Props> {
   render() {
 
 
-    axios.get(urlbull)
-      .then(function (response) {
-        Typebuildingid.length = 0;
-        Typebuildingname.length = 0;
-        for (var i = 0; i < response.data.length; i++) {
-          Typebuildingid.push(response.data[i].id);
-          Typebuildingname.push(response.data[i].name);
-        }
-      })
+    /*   axios.get(urlbull)
+        .then(function (response) {
+          Typebuildingid.length = 0;
+          Typebuildingname.length = 0;
+          for (var i = 0; i < response.data.length; i++) {
+            Typebuildingid.push(response.data[i].id);
+            Typebuildingname.push(response.data[i].name);
+          }
+        }) */
     return (
 
 
@@ -176,14 +176,13 @@ export default class Buildings extends Component<Props> {
             </View>
             <View style={styles.inputContainer}>
               <Dropdown
+              id="building"
                 style={{ width: 350, alignSelf: 'center' }}
-                placeholder={'select Building Type'}
+                placeholder={this.state.idBuildingType}
                 onSelect={(Value) => {
                   this.state.idBuildingType = Typebuildingid[Value];
-
-
                 }}
-                items={Typebuildingname}
+                items={Typebuildingid}
 
 
 
@@ -197,13 +196,7 @@ export default class Buildings extends Component<Props> {
                 onChangeText={(name) => this.setState({ name })} />
             </View>
 
-            <View style={styles.inputContainer}>
-              <TextInput style={styles.inputs}
-                placeholder="state"
-                keyboardType="state"
-                underlineColorAndroid='transparent'
-                onChangeText={(state) => this.setState({ state })} />
-            </View>
+            
 
 
             <TouchableOpacity style={styles.submitButtonText} onPress={() => this.onClickListener('sign_up')}>

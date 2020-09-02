@@ -47,13 +47,13 @@ export default class Addimages extends React.Component {
     // ImagePicker invoked, picking an image
     ImagePicker.showImagePicker(options, (response) => {
       // Logging various errors/ cancels for the ImagePicker
-      console.log('ImagePicker response: ', response);
+      //console.log('ImagePicker response: ', response);
       if (response.didCancel) {
-        console.log('User cancelled ImagePicker');
+        //console.log('User cancelled ImagePicker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        //console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        //console.log('User tapped custom button: ', response.customButton);
       } else {
         // Saving the URI from response as a variable and a state (state is used in render)
         const source = { uri: response.uri };
@@ -62,12 +62,12 @@ export default class Addimages extends React.Component {
         });
         // fetch needs the source as a string, but "source" is an object
         const sourceAsString = source.uri.toString();
-        console.log('sourceAsString = ', sourceAsString);
+        //console.log('sourceAsString = ', sourceAsString);
 
         // For storing the file on a server we cut of the filename and its
         // extension from the file URI
         const fileName = sourceAsString.split('/').pop();
-        console.log('filename = ', fileName);
+        //console.log('filename = ', fileName);
 
         // Creating new FormData for the image upload
         const data = new FormData();
@@ -88,16 +88,16 @@ export default class Addimages extends React.Component {
         )
         // Checking the HTTP response and adjusting uploadState
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           if (res.status === 200) {
             this.setState({
               uploadState: 'Upload finished.',
             });
           } else {
             const responseStatusString = res.status.toString();
-            console.log('responseStatusString: ', responseStatusString);
+            //console.log('responseStatusString: ', responseStatusString);
             const networkError = 'An error occured during uploading, errorcode: ' + responseStatusString;
-            console.log('networkError: ', networkError);
+            //console.log('networkError: ', networkError);
             this.setState({
               uploadState: networkError,
             });
@@ -105,7 +105,7 @@ export default class Addimages extends React.Component {
         })
         // Logging any networking errors
         .catch((error) => {
-          console.log('An error occured during networking: ', error);
+          //console.log('An error occured during networking: ', error);
         });
 
         // Create a DB entry for the image
@@ -130,13 +130,13 @@ export default class Addimages extends React.Component {
           body: dbData,
         }).then(res => res.text())
         .then(text => {
-          console.log('Database response: ', text);
+          //console.log('Database response: ', text);
           this.setState({
             databaseEntryState: text,
           });
         })
         .catch((error) => {
-          console.log('DB error: ', error);
+          //console.log('DB error: ', error);
         });
       }
     });
@@ -154,33 +154,33 @@ export default class Addimages extends React.Component {
     // ImagePicker invoked, picking a video
     ImagePicker.showImagePicker(options, (response) => {
       // Logging various errors/ cancels
-      console.log('Video picker response:  = ', response);
+      //console.log('Video picker response:  = ', response);
       if (response.didCancel) {
-        console.log('User cancelled VideoPicker');
+        //console.log('User cancelled VideoPicker');
       } else if (response.error) {
-        console.log('VideoPicker Error: ', response.error);
+        //console.log('VideoPicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        //console.log('User tapped custom button: ', response.customButton);
       } else {
         // Saving the URI from response as a variable and a state (state is used in render)
         const source = { uri: response.uri };
-        console.log('Source= ', source);
+        //console.log('Source= ', source);
         this.setState({
           videoSource: response.uri,
         });
         // ImagePicker returns a .uri and a .path for videos
         // Need .path to write the correct filename later on
         const path = { path: response.path };
-        console.log('Path= ', path);
+        //console.log('Path= ', path);
 
         // fetch needs the source as a string, "source" is an object
         const sourceAsString = source.uri.toString();
-        console.log('Source URI is: ', sourceAsString);
+        //console.log('Source URI is: ', sourceAsString);
 
         // For storing the file on a server we cut of the filename and its
         // extension from the file URI
         const fileName = path.path.toString().split('/').pop();
-        console.log('The cut filename is: ', fileName);
+        //console.log('The cut filename is: ', fileName);
 
         // Creating new FormData for the video upload
         const data = new FormData();
@@ -200,16 +200,16 @@ export default class Addimages extends React.Component {
         }))
         // Checking the HTTP response and adjusting uploadState
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           if (res.status === 200) {
             this.setState({
               uploadState: 'Upload finished.',
             });
           } else {
             const responseStatusString = res.status.toString();
-            console.log('responseStatusString: ', responseStatusString);
+            //console.log('responseStatusString: ', responseStatusString);
             const networkError = 'An error occured during uploading, errorcode: ' + responseStatusString;
-            console.log('networkError: ', networkError);
+            //console.log('networkError: ', networkError);
             this.setState({
               uploadState: networkError,
             });
@@ -217,7 +217,7 @@ export default class Addimages extends React.Component {
         })
         // Logging any networking errors
         .catch((error) => {
-          console.log('An error occured during networking: ', error);
+          //console.log('An error occured during networking: ', error);
         });
 
         // Create a DB entry for the image
@@ -242,13 +242,13 @@ export default class Addimages extends React.Component {
           body: dbData,
         }).then(res => res.text())
         .then(text => {
-          console.log('Database response: ', text);
+          //console.log('Database response: ', text);
           this.setState({
             databaseEntryState: text,
           });
         })
         .catch((error) => {
-          console.log('DB error: ', error);
+          //console.log('DB error: ', error);
         });
       }
     });

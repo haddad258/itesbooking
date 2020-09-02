@@ -18,7 +18,7 @@ export default class Bookingsadd extends Component<Props> {
                   lastName:'',
                   email : '',
                   password: '',
-                  phone:'',
+                  topic:'',
                   status: '',
                   wholeResult: '',
                   dateS:'',
@@ -60,50 +60,52 @@ export default class Bookingsadd extends Component<Props> {
   registerCall(){
    var that = this;
    var url = that.state.baseUrl;
-    //console.log("url:"+url);
+    ////console.log("url:"+url);
    //let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
    let body ={
     "idRoom": this.props.route.params.room.room.id,
     "startDateTime": this.state.dateS,
     "endDateTime": this.state.dateE,
     "userLogin": this.state.UserLogin,
-    "password":this.state.password
+    "password":this.state.password,
+    "topic":this.state.topic
 
   }
+  
 var NAMEROOM= this.props.route.params.room.room.name
   axios.post(savebooking,body )
    .then(function (response) {
      alert("Room "+NAMEROOM+ "are reseverd for you: thanks for visit" );
-    // console.log("this.reponse")
+    // //console.log("this.reponse")
    })
    .catch(function (error) {
      alert("result:"+error)
    }); 
    
-  /*  console.log(body)
+  /*  //console.log(body)
    axios.post(url , body ) .then(function (response) {
          
            return response.json();
          }).then(function (result) {  
-            // console.log(result);
+            // //console.log(result);
             if(!result.error){
              that.setState({ status: result.error,
                              wholeResult: result,
                           });
              Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-             console.log(that.state.wholeResult.user.uid);
+             //console.log(that.state.wholeResult.user.uid);
          }else{
           Alert.alert(result.error_msg);
-          console.log(result);
+          //console.log(result);
     }
  }).catch(function (error) {
-    console.log("-------- error ------- "+error);
+    //console.log("-------- error ------- "+error);
     alert("result:"+error)
   });*/
  } 
  
  render() {
-  console.log(this.props.route.params.room)
+  //console.log(this.props.route.params.room)
    return (
      
  
@@ -125,7 +127,18 @@ var NAMEROOM= this.props.route.params.room.room.name
     <Time brand={this.handeldateS.bind(this)}></Time>
     <Text>End Date Booking </Text>
     <Time brand={this.handeldateE.bind(this)}></Time>
-   
+
+
+    <View style={styles.inputContainer}>
+    <TextInput style={styles.inputs}
+     placeholder="topic"
+     keyboardType="email-address"
+     underlineColorAndroid='transparent'
+     onChangeText={(topic) => this.setState({topic})}/>
+    </View>
+
+
+
     <View style={styles.inputContainer}>
     <TextInput style={styles.inputs}
      placeholder="UserLogin"

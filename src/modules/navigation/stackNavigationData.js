@@ -43,10 +43,10 @@ const headerLeftComponent = (props) => {
       }}
     >
       <Image
-        source={require('../../assets/images/icons/arrow-back.png')}
+        source={require('../../assets/images/icons/arrow3x.png')}
         resizeMode="contain"
         style={{
-          height: 20,
+          height: 30,width:30,
         }}
       />
     </TouchableOpacity>    

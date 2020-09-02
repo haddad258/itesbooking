@@ -37,7 +37,7 @@ export default class Listzone extends Component {
 
      axios.get(urlcnst).then(response => response.data)
      .then((data) => {
-      console.log(urlcnst)
+      //console.log(urlcnst)
       data.forEach(element =>{
         this.state.tableData.push(Object.values(element))
        });  
@@ -117,10 +117,10 @@ export default class Listfloors extends Component {
   }
 
   componentDidMount(){
-console.log(urlcnst)
+//console.log(urlcnst)
     axios.get(urlcnst).then(response => response.data)
     .then((data) => {
-      console.log(data)
+      //console.log(data)
       data.forEach(element =>{
         this.state.tableData.push(element)
        })
@@ -158,11 +158,11 @@ console.log(urlcnst)
               <View style={styles.content}>
                 <View style={mainContentStyle}>
                   <View style={styles.text}>
-                    <Text style={styles.name}>{Notification.zone["name "] }</Text>
+                    <Text style={styles.name}>{Notification.zone.name }</Text>
                     
                   </View>
                   <Text > Building: {Notification.building.name}  </Text>
-          <Text> type: {Notification.zoneType.name}</Text>
+          <Text> type: {Notification.name}</Text>
                   <Text style={styles.timeAgo}>
                   {Notification.zone.description}
                   </Text>

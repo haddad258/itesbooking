@@ -14,7 +14,7 @@ import { colors, fonts } from '../../styles';
 import { RadioGroup, GridRow } from '../../components';
 import axios from 'axios'
 import { placeholder } from 'i18n-js';
-var urlgrid =require('../../const/bookapi')()+'sib-api/booking/bookings/with-details/all-rooms'
+var urlgrid = require('../../const/bookapi')() + 'sib-api/booking/bookings/with-details/all-rooms'
 
 const listData = [
   {
@@ -26,43 +26,44 @@ const listData = [
     badge: 'NEW',
     badgeColor: '#3cd39f',
     image:
-      'https://i.ibb.co/vV7yp07/salle.jpg',
+      '',
   },
 
 ]
-var imagestatic = 'https://i.ibb.co/vV7yp07/salle.jpg'
+var imagestatic = 'https://i.ibb.co/GxZZqWz/salle2.jpg'
 
 export default class GridsScreen extends React.Component {
 
-state={
-  listofroom : []
-}
+  state = {
+    listofroom: []
+  }
 
   _getRenderItemFunction = () =>
     [this.renderRowOne, this.renderRowTwo, this.renderRowThree][
-      this.props.tabIndex
+    this.props.tabIndex
     ];
 
-/*   _openArticle = article => {
-      this.props.navigation.navigate('Article', {
-        article,
-      });
-    };  */
+  /*   _openArticle = article => {
+        this.props.navigation.navigate('Article', {
+          article,
+        });
+      };  */
 
 
-    _openArticle = roomid => {
-      this.props.navigation.navigate('roomsdetails',{
-        roomid
-      })
-    };
-  
+  _openArticle = roomid => {
+    this.props.navigation.navigate('roomsdetails', {
+      roomid
+    })
+    console.log(roomid)
+  };
+
 
   renderRowOne = rowData => {
     const cellViews = rowData.item.map(item => (
       <TouchableOpacity key={item.id} onPress={() => this._openArticle(item)}>
         <View style={styles.itemOneContainer}>
           <View style={styles.itemOneImageContainer}>
-            <Image style={styles.itemOneImage} source={{ uri: imagestatic }} />
+            <Image style={styles.itemOneImage} source={{ uri: 'https://i.ibb.co/GxZZqWz/salle2.jpg' }} />
           </View>
           <View style={styles.itemOneContent}>
             <Text style={styles.itemOneTitle} numberOfLines={1}>
@@ -87,7 +88,7 @@ state={
               styleName="collapsible"
               numberOfLines={4}
             >
-              type salle: "{item.room.roomType.name}-{item.room.roomType.description}"
+              type salle: "{item.room.room.name}-{item.room.room.description} with {item.room.room.capacity} places"
             </Text>
             <Text style={styles.itemOnePrice} numberOfLines={1}>
               {item.price}
@@ -110,12 +111,12 @@ state={
       onPress={() => this._openArticle(item)}
     >
       <View style={styles.itemTwoContent}>
-        <Image style={styles.itemTwoImage} source={{ uri: imagestatic }} />
+        <Image style={styles.itemTwoImage} source={{ uri: 'https://i.ibb.co/GxZZqWz/salle2.jpg' }} />
         <View style={styles.itemTwoOverlay} />
-         <Text style={styles.itemTwoTitle}>{item.room.room.name}</Text>
-         <Text style={styles.itemTwoSubTitle}>{item.room.room.description}</Text>
-        <Text style={styles.itemTwoPrice}>{item.room.floor.name}  {item.room.building.name}</Text>  
-        
+        <Text style={styles.itemTwoTitle}>{item.room.room.name}</Text>
+        <Text style={styles.itemTwoSubTitle}>{item.room.room.description} with {item.room.room.capacity} places</Text>
+        <Text style={styles.itemTwoPrice}>{item.room.floor.name}  {item.room.building.name}</Text>
+
       </View>
     </TouchableOpacity>
   );
@@ -129,34 +130,57 @@ state={
       <View style={styles.itemThreeSubContainer}>
         <Image source={{ uri: imagestatic }} style={styles.itemThreeImage} />
         <View style={styles.itemThreeContent}>
-          <Text style={styles.itemThreeBrand}>{ item.room.room.name }</Text>
+          <Text style={styles.itemThreeBrand}>{item.room.room.name}</Text>
           <View>
-            <Text style={styles.itemThreeTitle}>{ item.room.floor.name }</Text>
+            <Text style={styles.itemThreeTitle}>{item.room.floor.name}</Text>
             <Text style={styles.itemThreeSubtitle} numberOfLines={1}>
-              {item.room.roomType.description}
+              {item.room.room.description}
             </Text>
           </View>
           <View style={styles.itemThreeMetaContainer}>
-            {item.room.room && (
+            {item.bookings && (
+
               <View
                 style={[
                   styles.badge,
-                 
-                  (!item.bookings   )&& { backgroundColor: colors.green },
-                  styleName="libre",
-                
-                ]} 
-                  >  
-                  
+
+                  (!item.bookings) && { backgroundColor: colors.green },
+                  styleName = "libre",
+
+                ]}
+              >
+
                 <Text
                   style={{ fontSize: 10, color: colors.white }}
                   styleName="reserved"
-                  
+
                 >
-              reserved
+                  reserved
                 </Text>
               </View>
             )}
+            {!item.bookings && (
+
+              <View
+                style={[
+                  styles.badge,
+
+                  (!item.bookings) && { backgroundColor: colors.green },
+                  styleName = "libre",
+
+                ]}
+              >
+
+                <Text
+                  style={{ fontSize: 10, color: colors.white }}
+                  styleName="reserved"
+
+                >
+                  libre
+  </Text>
+              </View>
+            )}
+
             <Text style={styles.itemThreePrice}> local {item.room.building.name} {item.room.zone.name}</Text>
           </View>
         </View>
@@ -164,25 +188,25 @@ state={
       <View style={styles.itemThreeHr} />
     </TouchableOpacity>
   );
-  componentDidMount(){
+  componentDidMount() {
 
- 
+    console.log("thisurlgrid", urlgrid)
     axios.get(urlgrid).then(response => response.data)
-    .then((data) => {
-      
-   //   tableData.push(Object.values(data[0]))
-   this.setState({listofroom: data})
-  // console.log(data)
+      .then((data) => {
 
-   
+        //   tableData.push(Object.values(data[0]))
+        this.setState({ listofroom: data })
 
-  
-       
-     })
-    }
+
+
+
+
+
+      })
+  }
 
   render() {
-  //  console.log(this.state.listofroom)
+    //  console.log(this.state.listofroom)
     const groupedData =
       this.props.tabIndex === 0
         ? GridRow.groupByRows(this.state.listofroom, 2)
@@ -335,6 +359,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  itemThreePrice: {
+    fontFamily: fonts.primaryRegular,
+    fontSize: 15,
+    color: '#5f5f5f',
+    textAlign: 'right',
   },
   itemThreePrice: {
     fontFamily: fonts.primaryRegular,

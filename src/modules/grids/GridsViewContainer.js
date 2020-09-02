@@ -12,7 +12,7 @@ const listData = [
     badge: 'NEW',
     badgeColor: '#3cd39f',
     image:
-      'https://i.ibb.co/vV7yp07/salle.jpg',
+      '',
   },
   {
     id: 2,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -17,18 +17,7 @@ export default class Homerooms extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        { id: 1, title: "You", color: "#FF4500", image: "https://img.icons8.com/color/70/000000/name.png" },
-        { id: 2, title: "Home", color: "#87CEEB", image: "https://img.icons8.com/office/70/000000/home-page.png" },
-        { id: 3, title: "Love", color: "#4682B4", image: "https://img.icons8.com/color/70/000000/two-hearts.png" },
-        { id: 4, title: "Family", color: "#6A5ACD", image: "https://img.icons8.com/color/70/000000/family.png" },
-        { id: 5, title: "Friends", color: "#FF69B4", image: "https://img.icons8.com/color/70/000000/groups.png" },
-        { id: 6, title: "School", color: "#00BFFF", image: "https://img.icons8.com/color/70/000000/classroom.png" },
-        { id: 7, title: "Things", color: "#00FFFF", image: "https://img.icons8.com/dusk/70/000000/checklist.png" },
-        { id: 8, title: "World", color: "#20B2AA", image: "https://img.icons8.com/dusk/70/000000/globe-earth.png" },
-        { id: 9, title: "Remember", color: "#191970", image: "https://img.icons8.com/color/70/000000/to-do.png" },
-        { id: 10, title: "Game", color: "#008080", image: "https://img.icons8.com/color/70/000000/basketball.png" },
-      ],
+   
       tableData: []
     };
   }
@@ -48,7 +37,7 @@ export default class Homerooms extends Component {
     axios.get(urlconst).then(response => response.data)
       .then((data) => {
 
-        console.log(urlconst)
+        //console.log(urlconst)
         data.forEach(element => {
           this.state.tableData.push(element)
         })
@@ -102,7 +91,7 @@ const styles = StyleSheet.create({
   listContainer: {
     alignItems: 'center'
   },
-  /******** card **************/
+ 
   card: {
     shadowColor: '#474747',
     shadowOffset: {
@@ -156,4 +145,151 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold'
   },
-});      
+});       */
+
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList
+} from 'react-native';
+import axios from 'axios'
+var urlcnst =  require('../../const/bookapi')() + 'sib-api/booking/bookings/with-details/all-rooms'
+
+
+export default class Homerooms extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      tableData: []
+    }
+  }
+
+  componentDidMount() {
+
+    axios.get(urlcnst)
+      .then((response) => {
+
+
+        this.setState({tableData:response.data})
+        
+      })
+
+  }
+  openhomeroom = room => {
+    this.props.navigation.navigate('Home', {
+      room
+    })
+  };
+
+  render() {
+    //console.log(this.state.tableData)
+    return (
+      <FlatList
+        style={styles.root}
+        data={this.state.tableData}
+        extraData={this.state}
+        ItemSeparatorComponent={() => {
+          return (
+            <View style={styles.separator} />
+          )
+        }}
+        keyExtractor={(item) => {
+          return item.id;
+        }}
+        renderItem={(item) => {
+          
+          const Notification = item.item;
+          let attachment = <View />;
+
+          let mainContentStyle;
+          if (Notification.attachment) {
+            mainContentStyle = styles.mainContent;
+            attachment = <Image style={styles.attachment} source={{ uri: "https://img.icons8.com/color/70/000000/name.png" }} />
+          }
+          return (
+            <TouchableOpacity style={[styles.card, { backgroundColor: "#87CEEB" }]} onPress={() => { this.openhomeroom(Notification) }}>
+            <View style={styles.container}>
+              <Image source={{ uri: "https://img.icons8.com/office/70/000000/home-page.png" }} style={styles.avatar} />
+              <View style={styles.content}>
+                <View style={mainContentStyle}>
+                  <View style={styles.text}>
+                    <Text style={styles.name}>{Notification.room.room.name}</Text>
+
+                  </View>
+                  <Text >Location: {Notification.room.building.name}-{Notification.room.floor.name} </Text>
+                  <Text>Type room: {Notification.room.room.name}</Text>
+                  <Text style={styles.timeAgo}>
+                    {Notification.room.room.description} with capactity {Notification.room.room.capacity} person
+                  </Text>
+                </View>
+                {attachment}
+              </View>
+            </View>
+            </TouchableOpacity>
+          );
+          
+        }} />
+    );
+    
+  }
+}
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: "#FFFFFF"
+  },
+  container: {
+    padding: 16,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: "#FFFFFF",
+    alignItems: 'flex-start'
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  text: {
+    marginBottom: 5,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  content: {
+    flex: 1,
+    marginLeft: 16,
+    marginRight: 0
+  },
+  mainContent: {
+    marginRight: 60
+  },
+  img: {
+    height: 50,
+    width: 50,
+    margin: 0
+  },
+  attachment: {
+    position: 'absolute',
+    right: 0,
+    height: 50,
+    width: 50
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#CCCCCC"
+  },
+  timeAgo: {
+    fontSize: 12,
+    color: "#696969"
+  },
+  name: {
+    fontSize: 16,
+    color: "#1E90FF"
+  }
+});  

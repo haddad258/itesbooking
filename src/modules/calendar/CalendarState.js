@@ -1,7 +1,10 @@
+
+import axios from 'axios'
+var urlcnst = require('../../const/bookapi')() + 'sib-api/booking/bookings/by-date/between-dates?startDate=2020-03-23T09:07:00.422Z&endDate=2050-12-29T08:16:14.132Z'
 const ITEMS_LOADED = 'CalendarState/ITEMS_LOADED';
 
 function itemsLoaded(items) {
-  console.log(items)
+//  //console.log(items)
   return {
     type: ITEMS_LOADED,
     items,
@@ -20,7 +23,23 @@ export function loadItems(day) {
 
     const items = {};
 
-    for (let i = -15; i < 85; i += 1) {
+axios.get(urlcnst)
+.then((response) =>{
+console.log(response.data)
+
+
+  response.data.forEach(element => {
+  //console.log(new Date(Object.keys(element)[0]).toISOString().split('T')[0])
+items[new Date(Object.keys(element)[0]).toISOString().split('T')[0]] = [{name: "rafik" ,time:"hello",labels:[]}]
+
+});
+
+})
+
+
+
+
+   /*  for (let i = -15; i < 85; i += 1) {
       const time = day.timestamp + i * 24 * 60 * 60 * 1000;
       const strTime = new Date(time).toISOString().split('T')[0];
       if (!items[strTime]) {
@@ -28,20 +47,20 @@ export function loadItems(day) {
         const numItems = randomNumber(0, 5);
         for (let j = 0; j < numItems; j += 1) {
           items[strTime].push({
-            name: `Meeting with ${names[randomNumber(0, 4)]}`,
+            name: `newItems with ${names[randomNumber(0, 4)]}`,
             time: `${randomNumber(0, 24)}:${randomNumber(0, 60)}`,
             labels: randomNumber(0, 1) ? [labels[randomNumber(0, 1)]] : [],
           });
         }
       }
-    }
+    } */
 
     const newItems = {};
     Object.keys(items).forEach(key => {
       newItems[key] = items[key];
     });
 
-   // console.log(newItems);
+   // //console.log(newItems);
 
     dispatch(itemsLoaded(newItems));
   };

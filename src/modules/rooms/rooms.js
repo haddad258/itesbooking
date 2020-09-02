@@ -11,7 +11,7 @@ var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
 var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
 var urlbfloors =require('../../const/api')()+'/sib-api/common/floors/by-zone/'
 var urlroomtype = require('../../const/api')()+'/sib-api/common/rooms/types' 
-var typeroomid=[]
+var typeroomid=["TypeM1", "TypeM2","TypeM3","TypeM4","TypeM5"];
 var typeroomname=[]
 var selectbuildingid =[]
 var selectbuildingname = []
@@ -35,12 +35,13 @@ constructor(props) {
                  idFloor:'',
                  idZone : '',
                  description:'',
-                 idRoomType: 0,
+                 idRoomType: '',
                  name:'',
                  state:'',
                  postalCode:'',
                  type:'',                 
                  status: '',
+                 capacity:'',
                  wholeResult: '',
                 baseUrl: 'http://192.168.1.21:9970/sib-api/common/rooms' 
               };
@@ -81,12 +82,12 @@ onClickListener = (viewId) => {
    
     
     "description": this.state.description,
-    
+    "capacity":this.state.capacity,
     "idBuilding": this.state.idBuilding,
     "idFloor": this.state.idFloor,
     
     "idZone": this.state.idZone,
-    "idRoomType":this.state.idRoomType,
+    "type":this.state.idRoomType,
     "images": [
       "string"
     ],
@@ -94,11 +95,11 @@ onClickListener = (viewId) => {
   
     "name": this.state.name
   }
-  console.log(body)
+  //console.log(body)
   axios.post(urlconst,body )
   .then(function (response) {
     Alert.alert("the room was successfully created "  );
-    console.log(response.data)
+    //console.log(response.data)
   })
   .catch(function (error) {
     alert("result:"+error)
@@ -107,19 +108,19 @@ onClickListener = (viewId) => {
         
           return response.json();
         }).then(function (result) {  
-           // console.log(result);
+           // //console.log(result);
            if(!result.error){
             that.setState({ status: result.error,
                             wholeResult: result,
                          });
             Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-            console.log(that.state.wholeResult.user.uid);
+            //console.log(that.state.wholeResult.user.uid);
         }else{
          Alert.alert(result.error_msg);
-         console.log(result);
+         //console.log(result);
    }
 }).catch(function (error) {
-   console.log("-------- error ------- "+error);
+   //console.log("-------- error ------- "+error);
    alert("result:"+error)
  }); */
 }
@@ -135,7 +136,7 @@ render() {
     }
   })
 
-  axios.get(urlroomtype)
+ /*  axios.get(urlroomtype)
   .then(function (response) {     
     typeroomid.length=0;
     typeroomname.length=0;   
@@ -144,7 +145,7 @@ render() {
       typeroomname.push(response.data[i].name);
     }
   })
-
+ */
   return (
     
 
@@ -197,6 +198,13 @@ render() {
      onChangeText={(description) => this.setState({description})}/>
    </View>
    <View style={styles.inputContainer}>
+   <TextInput style={styles.inputs}
+     placeholder="capacity"
+     keyboardType="idZone-idBuilding"
+     underlineColorAndroid='transparent'
+     onChangeText={(capacity) => this.setState({capacity})}/>
+   </View>
+   <View style={styles.inputContainer}>
    <Dropdown
           style={{ width: 350, alignSelf: 'center' }}
           placeholder={'select typeroom'}     
@@ -204,7 +212,7 @@ render() {
          
           
           }}
-          items={typeroomname}
+          items={typeroomid}
 
           
         
@@ -241,7 +249,7 @@ render() {
      placeholder={'select zone'}
           style={{ width: 350, alignSelf: 'center' }}
           onSelect={(Value) => {this.state.idZone =selectzoneid[Value] ;
-            console.log(urlbfloors+selectzoneid[Value])
+            //console.log(urlbfloors+selectzoneid[Value])
             axios.get(urlbfloors+selectzoneid[Value])
             .then(function (response) {
               // handle success

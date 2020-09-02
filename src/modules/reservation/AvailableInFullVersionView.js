@@ -60,7 +60,7 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
   registerCall(){
    var that = this;
    var url = that.state.baseUrl;
-    //console.log("url:"+url);
+    ////console.log("url:"+url);
    //let body= {"firstName": this.state.firstName, "lastName":this.state.lastName, "email": this.state.email,"password": this.state.password , "phone":this.state.phone,}
    let body ={
     "idRoom": this.props.route.params.article,
@@ -68,34 +68,34 @@ export default class AvailableInFullVersionScreen extends Component<Props> {
     "endDateTime": this.state.dateE,
     "idUser": this.state.UserLogin
   }
- console.log(body)
+ //console.log(body)
   axios.post('http://192.168.1.187:9880/sib-api/booking/bookings/',body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data);
-    // console.log("this.reponse")
+    // //console.log("this.reponse")
    })
    .catch(function (error) {
      alert("result:"+error)
    }); 
    
-  /*  console.log(body)
+  /*  //console.log(body)
    axios.post(url , body ) .then(function (response) {
          
            return response.json();
          }).then(function (result) {  
-            // console.log(result);
+            // //console.log(result);
             if(!result.error){
              that.setState({ status: result.error,
                              wholeResult: result,
                           });
              Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-             console.log(that.state.wholeResult.user.uid);
+             //console.log(that.state.wholeResult.user.uid);
          }else{
           Alert.alert(result.error_msg);
-          console.log(result);
+          //console.log(result);
     }
  }).catch(function (error) {
-    console.log("-------- error ------- "+error);
+    //console.log("-------- error ------- "+error);
     alert("result:"+error)
   });*/
  } 

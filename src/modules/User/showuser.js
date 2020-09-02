@@ -21,12 +21,12 @@ export default class Showuser extends Component {
         axios.post(urlconst, this.props.route.params.userinfo).then(response => response.data)
         .then((data) => {
             this.setState({user : data})
-          console.log(data)
+          //console.log(data)
          })
     } 
 
   render() {
-    console.log(this.state.user)
+    //console.log(this.state.user)
    if(this.props.route.params.userinfo.password ==="" || this.props.route.params.userinfo.loginuser ==="" || !this.state.user.id){
 
     

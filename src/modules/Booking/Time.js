@@ -12,7 +12,7 @@ export default class Time extends Component {
     //set value in state for initial date
     var today = new Date(),
     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + '-'+ today.getHours() ;
-   console.log(today)
+   ////console.log(today)
     this.state = {date: date}
   }
 

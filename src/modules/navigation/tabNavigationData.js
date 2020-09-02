@@ -4,6 +4,7 @@ import GridsScreen from '../grids/GridsViewContainer';
 import PagesScreen from '../pages/PagesViewContainer';
 import ComponentsScreen from '../components/ComponentsViewContainer';
 import Typecompement from '../../Type/typecompoment'
+import GridsScreenlibre from '../grids/Roomlibrenow';
 
 const iconHome = require('../../assets/images/tabbar/home.png');
 const iconCalendar = require('../../assets/images/tabbar/calendar.png');
@@ -23,9 +24,14 @@ const tabNavigationData = [
     icon: iconCalendar,
   },
   {
-    name: 'Salles',
+    name: 'Room',
     component: GridsScreen,
     icon: iconGrids,
+  },
+  {
+    name: 'Room Libre Now',
+    component: GridsScreenlibre,
+    icon: iconComponents,
   },
   {
     name: 'Paramtres',
@@ -34,14 +40,14 @@ const tabNavigationData = [
   },
 /*   {
     name: 'Components',
-    component: ComponentsScreen,
+    component: ComponentsScreen,  GridsScreenlibre
     icon: iconComponents,
   }, */
-  {
+ /*  {
     name: 'Type',
     component: Typecompement,
     icon: iconComponents,
-  },
+  }, */
 ];
 
 export default tabNavigationData;

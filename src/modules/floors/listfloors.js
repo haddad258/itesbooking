@@ -121,7 +121,7 @@ export default class Listfloors extends Component {
 
     axios.get(urlcnst).then(response => response.data)
     .then((data) => {
-      console.log(data)
+      //console.log(data)
       data.forEach(element =>{
         this.state.tableData.push(element)
        })
@@ -163,7 +163,7 @@ export default class Listfloors extends Component {
                     
                   </View>
                   <Text >zone: {Notification.zone.name} - Building: {Notification.building.name}  </Text>
-          <Text> type: {Notification.type.name}</Text>
+          
                   <Text style={styles.timeAgo}>
                   {Notification.floor.description}
                   </Text>

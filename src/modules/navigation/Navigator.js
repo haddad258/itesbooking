@@ -30,7 +30,7 @@ const drawerData = [
     icon: iconGrids,
   },
   {
-    name: 'Profile',
+    name: 'ProfileBooking',
     icon: iconPages,
   },
   {

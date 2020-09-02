@@ -109,29 +109,29 @@ export default class User extends Component<Props> {
     axios.post(urlcnst, body)
       .then(function (response) {
         alert("the user was successfully created with booking  " + response.data.userLogin);
-        //   console.log(response.data)
+        //   //console.log(response.data)
       })
       .catch(function (error) {
         alert("result:" + error)
-        //  console.log(body)
+        //  //console.log(body)
       });
     /*    axios.post(url , body ) .then(function (response) {
              
                return response.json();
              }).then(function (result) {  
-                // console.log(result);
+                // //console.log(result);
                 if(!result.error){
                 /*  that.setState({ status: result.error,
                                  wholeResult: result,
                               }); 
                  Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-                 console.log(that.state.wholeResult.user.uid);
+                 //console.log(that.state.wholeResult.user.uid);
              }else{
               Alert.alert(result.error_msg);
-              console.log(result);
+              //console.log(result);
         }
      }).catch(function (error) {
-        console.log("-------- error ------- "+error);
+        //console.log("-------- error ------- "+error);
         alert("result:"+error)
       });*/
   }

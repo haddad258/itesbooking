@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/haddadrafik258/Documents/itesbooking/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "/home/haddadrafik258/Documents/react-native-starter/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "/home/haddadrafik258/.gradle/caches/transforms-2/files-2.1/b06fecedb46cc99f3268c10e6bc77ed0/res/values-sw600dp-v13/values-sw600dp-v13.xml",

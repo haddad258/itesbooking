@@ -9,9 +9,10 @@ import Addimages from '../../addimages/importimage'
 var urlcnst = require('../../const/api')() +'sib-api/common/floors'
 var urlbull =require('../../const/api')()+'sib-api/common/buildings/'
 var urlbzone =require('../../const/api')()+ 'sib-api/common/zones/by-building/'
-var urltypefloors =require('../../const/api')()+'/sib-api/common/floors/types'
-var typefloorsnames=[]
-  var typefloorsid=[]
+var urltypefloorsna =require('../../const/api')()+'/sib-api/common/floors/types'
+
+var typefloorsid= ["TypeF1", "TypeF2","TypeF3","TypeF4","TypeF5"];
+  
 
 var selectbuildingid =[]
 var selectbuildingname = []
@@ -70,11 +71,11 @@ onClickListener = (viewId) => {
   
   
   
-  let body= { "images": [ "string"],"idBuilding": this.state.idBuilding, "idFloorType":this.state.idFloorType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
+  let body= { "images": [ "string"],"idBuilding": this.state.idBuilding, "type":this.state.idFloorType, "idZone": this.state.idZone, "description":this.state.description,"name":this.state.name }
   axios.post(urlcnst,body )
    .then(function (response) {
      alert("the floor was successfully created with id " + response.data.name);
-     console.log("this.reponse")
+     //console.log("this.reponse")
    })
    .catch(function (error) {
      alert("result:"+error)
@@ -85,19 +86,19 @@ onClickListener = (viewId) => {
         
           return response.json();
         }).then(function (result) {  
-           // console.log(result);
+           // //console.log(result);
            if(!result.error){
             that.setState({ status: result.error,
                             wholeResult: result,
                          });
             Alert.alert("User register successfully \n userId: "+that.state.wholeResult.user.uid);
-            console.log(that.state.wholeResult.user.uid);
+            //console.log(that.state.wholeResult.user.uid);
         }else{
          Alert.alert(result.error_msg);
-         console.log(result);
+         //console.log(result);
    }
 }).catch(function (error) {
-   console.log("-------- error ------- "+error);
+   //console.log("-------- error ------- "+error);
    alert("result:"+error)
  });*/
 } 
@@ -113,7 +114,7 @@ render() {
       selectbuildingname.push(response.data[i].name);
     }
   })
-  axios.get(urltypefloors)
+/*   axios.get(urltypefloors)
   .then(function (response) { 
     typefloorsid.length=0;
     typefloorsnames.length=0;   
@@ -121,7 +122,7 @@ render() {
       typefloorsid.push(response.data[i].id);
       typefloorsnames.push(response.data[i].name);
     }
-  })
+  }) */
 
   return (
     
@@ -169,7 +170,7 @@ render() {
           
           
           }}
-          items={typefloorsnames}
+          items={typefloorsid}
 
           
         

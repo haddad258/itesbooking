@@ -1,4 +1,4 @@
-#Thu Aug 27 13:48:22 CET 2020
-base.0=/home/haddadrafik258/Documents/react-native-starter/android/app/build/intermediates/transforms/dexMerger/debug/0
-renamed.0=classes.dex
+#Mon Sep 07 13:20:39 CET 2020
+base.0=/home/haddadrafik258/Desktop/itesLab/itesbooking/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
+renamed.0=classes.dex

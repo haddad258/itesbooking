@@ -213,7 +213,7 @@ export default class Homerooms extends Component {
             attachment = <Image style={styles.attachment} source={{ uri: "https://img.icons8.com/color/70/000000/name.png" }} />
           }
           return (
-            <TouchableOpacity style={[styles.card, { backgroundColor: "#87CEEB" }]} onPress={() => { this.openhomeroom(Notification) }}>
+            <TouchableOpacity style={[styles.card, { backgroundColor: "#87CEEB" }]} onPress={() => { this.openhomeroom(Notification.room.room.id) }}>
             <View style={styles.container}>
               <Image source={{ uri: "https://img.icons8.com/office/70/000000/home-page.png" }} style={styles.avatar} />
               <View style={styles.content}>

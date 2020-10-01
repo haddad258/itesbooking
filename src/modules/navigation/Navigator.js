@@ -37,6 +37,10 @@ const drawerData = [
     name: 'Components',
     icon: iconComponents,
   },
+  {
+    name: 'Common',
+    
+  },
 ];
 
 const Drawer = createDrawerNavigator();

@@ -12,6 +12,7 @@ import Showuser from '../User/showuser'
 import Listuser from '../User/listuser'
 import Listbuilding from '../buildings/listbuilding'
 import Typebuilding from '../buildings/Typebuilding'
+import Common from '../Common/Common'
 
 
 // import ProfileScreen from '../profile/ProfileViewContainer';

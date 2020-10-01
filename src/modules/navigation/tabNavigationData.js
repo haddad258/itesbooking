@@ -5,6 +5,7 @@ import PagesScreen from '../pages/PagesViewContainer';
 import ComponentsScreen from '../components/ComponentsViewContainer';
 import Typecompement from '../../Type/typecompoment'
 import GridsScreenlibre from '../grids/Roomlibrenow';
+import Common from '../Common/Common';
 
 const iconHome = require('../../assets/images/tabbar/home.png');
 const iconCalendar = require('../../assets/images/tabbar/calendar.png');
@@ -37,6 +38,11 @@ const tabNavigationData = [
     name: 'Paramtres',
     component: PagesScreen,
     icon: iconPages,
+  },
+  {
+    name: 'Common',
+    component: Common,
+    
   },
 /*   {
     name: 'Components',
